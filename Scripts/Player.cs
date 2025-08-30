@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 // -----------------------------------------------------------------------------
 // Player.cs
 // Author: Emily Braithwaite
@@ -14,10 +16,9 @@ public partial class Player : CharacterBody2D
 	private AnimatedSprite2D currentAnim, idleAnim, moveAnim, attackAnim, hurtAnim; // Animations
 	private Vector2? moveTarget = null; // For movement between tiles
 	private float moveSpeed = 64f; // Pixels per second
-	private float health = 100; // Player's health level
+	private float health = 100f; // Player's health level
 	private Label healthLabel;
-	private Node2D animFolder;
-	private Node2D raycastFolder;
+	private Node2D animFolder, raycastFolder;
 	private RayCast2D castLeft, castRight, castUp, castDown;
 
 
@@ -54,7 +55,9 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
 			Attack();
+			TurnManagerNode.NextTurn("attack");
 		}
+		// FOR TESTING PURPOSES
 		else if (Input.IsActionJustPressed("ui_text_indent"))
 		{
 			Hurt(20);

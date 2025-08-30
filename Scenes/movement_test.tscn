@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://dvrla5v8nyqkm"]
+[gd_scene load_steps=77 format=4 uid="uid://dvrla5v8nyqkm"]
 
 [ext_resource type="Script" uid="uid://ckgidqotrlpng" path="res://Scripts/Player.cs" id="1_7bx3r"]
 [ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_m2jms"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://clniu6vdvucty" path="res://Assets/Power Meter - Base.png" id="7_kqxjd"]
 [ext_resource type="Texture2D" uid="uid://hbar3x5y2y00" path="res://Assets/RabbitTakeDamage.png" id="7_plb23"]
 [ext_resource type="Texture2D" uid="uid://cn7qpwc5ml77n" path="res://Assets/Power Meter - Fill.png" id="8_o5rxp"]
+[ext_resource type="Script" uid="uid://boh7pstaetrum" path="res://Scripts/Inventory.cs" id="8_tpxdn"]
+[ext_resource type="Script" uid="uid://mr57ws5k4vlb" path="res://Scripts/Chest.cs" id="12_npj4n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jxyi"]
 texture = ExtResource("1_m2jms")
@@ -596,6 +598,9 @@ target_position = Vector2(-20, 0)
 [node name="CastRight" type="RayCast2D" parent="Player/Raycasts"]
 target_position = Vector2(21, 0)
 
+[node name="Inventory" type="Node2D" parent="Player"]
+script = ExtResource("8_tpxdn")
+
 [node name="Turn Manager" type="Node2D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("3_lcbp4")
 Player = NodePath("../Player")
@@ -635,9 +640,11 @@ theme_override_font_sizes/font_size = 24
 text = "- %"
 metadata/_edit_use_anchors_ = true
 
-[node name="Chest" type="StaticBody2D" parent="."]
+[node name="Chest" type="StaticBody2D" parent="." node_paths=PackedStringArray("PlayerInventory")]
 position = Vector2(424, 280)
 scale = Vector2(0.806684, 0.806684)
+script = ExtResource("12_npj4n")
+PlayerInventory = NodePath("../Player/Inventory")
 
 [node name="Sprite" type="Sprite2D" parent="Chest"]
 scale = Vector2(0.15625, 0.15625)
@@ -646,6 +653,9 @@ texture = ExtResource("2_lcbp4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chest"]
 position = Vector2(0, -0.0414124)
 shape = SubResource("RectangleShape2D_ou3lj")
+
+[node name="RayCast" type="RayCast2D" parent="Chest"]
+target_position = Vector2(0, 17.355)
 
 [connection signal="animation_finished" from="Player/Animations/Move" to="Player" method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Attack" to="Player" method="OnAttackAnimFinished"]
