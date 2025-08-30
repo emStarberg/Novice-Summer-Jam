@@ -13,7 +13,7 @@ script = ExtResource("1_nvv5w")
 texture = ExtResource("1_q8xid")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(6.175, 6.175)
+scale = Vector2(9.6, 9.6)
 shape = SubResource("CircleShape2D_5m8x6")
 
 [node name="Timer" type="Timer" parent="."]
