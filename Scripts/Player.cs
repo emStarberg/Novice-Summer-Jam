@@ -27,23 +27,27 @@ public partial class Player : CharacterBody2D
 		{
 			Position += new Vector2(16, 0);
 			TurnManagerNode.NextTurn("right");
+			facing = "right";
 		}
 		// Move left
 		if (Input.IsActionJustPressed("ui_left"))
 		{
 			Position += new Vector2(-16, 0);
 			TurnManagerNode.NextTurn("left");
+			facing = "left";
 		}
 		// Move down
 		if (Input.IsActionJustPressed("ui_down"))
 		{
 			Position += new Vector2(0, 16);
 			TurnManagerNode.NextTurn("down");
+			facing = "down";
 		}
 		// Move up
 		if (Input.IsActionJustPressed("ui_up"))
 		{
 			Position += new Vector2(0, -16);
+			facing = "up";
 			TurnManagerNode.NextTurn("up");
 		}
 
