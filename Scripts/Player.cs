@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 // -----------------------------------------------------------------------------
 // Player.cs
 // Author: Emily Braithwaite
@@ -14,20 +16,30 @@ public partial class Player : CharacterBody2D
 	private AnimatedSprite2D currentAnim, idleAnim, moveAnim, attackAnim, hurtAnim; // Animations
 	private Vector2? moveTarget = null; // For movement between tiles
 	private float moveSpeed = 64f; // Pixels per second
-	private float health = 100; // Player's health level
+	private float health = 100f; // Player's health level
 	private Label healthLabel;
+	private Node2D animFolder, raycastFolder;
+	private RayCast2D castLeft, castRight, castUp, castDown;
 
 
 	public override void _Ready()
 	{
 		// Set up animations
-		idleAnim = GetNode<AnimatedSprite2D>("Idle");
-		moveAnim = GetNode<AnimatedSprite2D>("Move");
-		attackAnim = GetNode<AnimatedSprite2D>("Attack");
-		hurtAnim = GetNode<AnimatedSprite2D>("Hurt");
+		animFolder = GetNode<Node2D>("Animations");
+		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Idle");
+		moveAnim = animFolder.GetNode<AnimatedSprite2D>("Move");
+		attackAnim = animFolder.GetNode<AnimatedSprite2D>("Attack");
+		hurtAnim = animFolder.GetNode<AnimatedSprite2D>("Hurt");
 		currentAnim = idleAnim;
 		// Connect moveAnim finished signal
 		moveAnim.AnimationFinished += OnMoveAnimFinished;
+
+		// Set up raycasts
+		raycastFolder = GetNode<Node2D>("Raycasts");
+		castLeft = raycastFolder.GetNode<RayCast2D>("CastLeft");
+		castRight = raycastFolder.GetNode<RayCast2D>("CastRight");
+		castUp = raycastFolder.GetNode<RayCast2D>("CastUp");
+		castDown = raycastFolder.GetNode<RayCast2D>("CastDown");
 
 		healthLabel = Healthbar.GetNode<Label>("Health Label");
 	}
@@ -43,10 +55,31 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
 			Attack();
+			TurnManagerNode.NextTurn("attack");
 		}
+		// FOR TESTING PURPOSES
 		else if (Input.IsActionJustPressed("ui_text_indent"))
 		{
 			Hurt(20);
+		}
+		if (Input.IsActionJustPressed("input_interact"))
+		{
+			if (castRight.IsColliding() && castRight.GetCollider() is Chest chestRight)
+			{
+				chestRight.Open();
+			}
+			if (castLeft.IsColliding() && castLeft.GetCollider() is Chest chestLeft)
+			{
+				chestLeft.Open();
+			}
+			if (castUp.IsColliding() && castUp.GetCollider() is Chest chestUp)
+			{
+				chestUp.Open();
+			}
+			if (castDown.IsColliding() && castDown.GetCollider() is Chest chestDown)
+			{
+				chestDown.Open();
+			}
 		}
 	}
 
@@ -108,31 +141,43 @@ public partial class Player : CharacterBody2D
 		// Only allow new movement if not currently moving
 		if (Input.IsActionJustPressed("ui_right"))
 		{
-			moveTarget = Position + new Vector2(16, 0);
-			TurnManagerNode.NextTurn("right");
 			facing = "right";
-			SwitchAnim(moveAnim);
+			if (!castRight.IsColliding())
+			{
+				moveTarget = Position + new Vector2(16, 0);
+				TurnManagerNode.NextTurn("right");
+				SwitchAnim(moveAnim);
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_left"))
 		{
-			moveTarget = Position + new Vector2(-16, 0);
-			TurnManagerNode.NextTurn("left");
 			facing = "left";
-			SwitchAnim(moveAnim);
+			if (!castLeft.IsColliding())
+			{
+				moveTarget = Position + new Vector2(-16, 0);
+				TurnManagerNode.NextTurn("left");
+				SwitchAnim(moveAnim);
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_down"))
 		{
-			moveTarget = Position + new Vector2(0, 16);
-			TurnManagerNode.NextTurn("down");
 			facing = "down";
-			SwitchAnim(moveAnim);
+			if (!castDown.IsColliding())
+			{
+				moveTarget = Position + new Vector2(0, 16);
+				TurnManagerNode.NextTurn("down");
+				SwitchAnim(moveAnim);
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_up"))
 		{
-			moveTarget = Position + new Vector2(0, -16);
-			TurnManagerNode.NextTurn("up");
 			facing = "up";
-			SwitchAnim(moveAnim);
+			if (!castUp.IsColliding())
+			{
+				moveTarget = Position + new Vector2(0, -16);
+				TurnManagerNode.NextTurn("up");
+				SwitchAnim(moveAnim);
+			}
 		}
 	}
 
