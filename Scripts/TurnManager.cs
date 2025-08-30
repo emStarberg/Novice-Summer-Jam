@@ -25,8 +25,10 @@ public partial class TurnManager : Node2D
 	/// <param name="playerAction">Action from player that has called this</param>
 	public void NextTurn(String playerAction)
 	{
-		GD.Print("Moved to next turn. Input: " + playerAction);
 		// Increase turn count
 		turnCount++;
+		GD.Print("Moved to turn: " + turnCount + " Input: " + playerAction);
+		
+
 	}
 }
