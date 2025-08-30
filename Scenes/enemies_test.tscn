@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvrla5v8nyqkm"]
+
+[ext_resource type="PackedScene" uid="uid://j47g70y1klup" path="res://Scenes/bat_enemy.tscn" id="1_y8hff"]
+[ext_resource type="Script" uid="uid://ddmv8finoosl0" path="res://Scripts/Player.cs" id="2_y3sds"]
+[ext_resource type="Texture2D" uid="uid://e56k82lh5eqn" path="res://icon.svg" id="3_y4d4i"]
+[ext_resource type="Script" uid="uid://mep0owgdqi1l" path="res://Scripts/TurnManager.cs" id="4_vp7fm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e51mn"]
+size = Vector2(16, 16)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BatEnemy" parent="." instance=ExtResource("1_y8hff")]
+position = Vector2(752, 434)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode") groups=["player"]]
+position = Vector2(480, 310)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("2_y3sds")
+TurnManagerNode = NodePath("../Turn Manager")
+
+[node name="Icon" type="Sprite2D" parent="Player"]
+position = Vector2(7.62939e-06, -7.62939e-06)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_y4d4i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_e51mn")
+
+[node name="Turn Manager" type="Node2D" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("4_vp7fm")
+Player = NodePath("../Player")
