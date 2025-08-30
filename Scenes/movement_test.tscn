@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://dvrla5v8nyqkm"]
+[gd_scene load_steps=34 format=4 uid="uid://dvrla5v8nyqkm"]
 
 [ext_resource type="Script" uid="uid://6sl2fcfi0hol" path="res://Scripts/Player.cs" id="1_7bx3r"]
 [ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_m2jms"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://rqdouckbmf1o" path="res://Assets/RabbitSwordIdle.png" id="3_m2jms"]
 [ext_resource type="Texture2D" uid="uid://dhlbxrkqsabbi" path="res://Assets/RabbitSwordRun.png" id="4_tuftd"]
 [ext_resource type="Script" uid="uid://darsdu3vjuwxh" path="res://Scripts/Camera.cs" id="5_5jxyi"]
+[ext_resource type="Texture2D" uid="uid://clniu6vdvucty" path="res://Assets/Power Meter - Base.png" id="7_kqxjd"]
+[ext_resource type="Texture2D" uid="uid://cn7qpwc5ml77n" path="res://Assets/Power Meter - Fill.png" id="8_o5rxp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jxyi"]
 texture = ExtResource("1_m2jms")
@@ -154,10 +156,6 @@ region = Rect2(32, 16, 16, 16)
 atlas = ExtResource("4_tuftd")
 region = Rect2(48, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8pchn"]
-atlas = ExtResource("4_tuftd")
-region = Rect2(64, 16, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygu0e"]
 atlas = ExtResource("4_tuftd")
 region = Rect2(16, 48, 16, 16)
@@ -169,10 +167,6 @@ region = Rect2(32, 48, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_uvhhi"]
 atlas = ExtResource("4_tuftd")
 region = Rect2(48, 48, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hoxcr"]
-atlas = ExtResource("4_tuftd")
-region = Rect2(64, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwun7"]
 atlas = ExtResource("4_tuftd")
@@ -186,10 +180,6 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("4_tuftd")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ybner"]
-atlas = ExtResource("4_tuftd")
-region = Rect2(64, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_tnv7f"]
 atlas = ExtResource("4_tuftd")
 region = Rect2(16, 32, 16, 16)
@@ -202,10 +192,6 @@ region = Rect2(32, 32, 16, 16)
 atlas = ExtResource("4_tuftd")
 region = Rect2(48, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ksaoh"]
-atlas = ExtResource("4_tuftd")
-region = Rect2(64, 32, 16, 16)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w3f3"]
 animations = [{
 "frames": [{
@@ -217,9 +203,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rhva6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8pchn")
 }],
 "loop": false,
 "name": &"down",
@@ -234,9 +217,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uvhhi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hoxcr")
 }],
 "loop": false,
 "name": &"left",
@@ -251,9 +231,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nwy7w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ybner")
 }],
 "loop": false,
 "name": &"right",
@@ -268,9 +245,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m57oo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ksaoh")
 }],
 "loop": false,
 "name": &"up",
@@ -283,23 +257,24 @@ animations = [{
 tile_map_data = PackedByteArray("AAAeABMAAAAEAAEAAAAdABMAAAAEAAEAAAAcABMAAAAEAAEAAAAfABMAAAAEAAEAAAAfABIAAAAEAAEAAAAeABIAAAAEAAEAAAAdABIAAAAEAAEAAAAcABIAAAAEAAEAAAAfABQAAAAEAAEAAAAeABQAAAAEAAEAAAAdABQAAAAEAAEAAAAcABQAAAAEAAEAAAAbABQAAAAEAAEAAAAbABMAAAAEAAEAAAAbABIAAAAEAAEAAAAbABEAAAAEAAEAAAAcABEAAAAEAAEAAAAdABEAAAAEAAEAAAAeABEAAAAEAAEAAAAfABEAAAAEAAEAAAAgABEAAAAEAAEAAAAgABIAAAAEAAEAAAAgABMAAAAEAAEAAAAgABQAAAAEAAEAAAAfABUAAAAEAAEAAAAeABUAAAAEAAEAAAAdABUAAAAEAAEAAAAcABUAAAAEAAEAAAAbABUAAAAEAAEAAAAaABUAAAAEAAEAAAAaABQAAAAEAAEAAAAaABMAAAAEAAEAAAAaABIAAAAEAAEAAAAaABEAAAAEAAEAAAAgABUAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_tuftd")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode", "Healthbar")]
 position = Vector2(480, 310)
 script = ExtResource("1_7bx3r")
 TurnManagerNode = NodePath("../Turn Manager")
+Healthbar = NodePath("../CanvasLayer/Control/Health Bar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_e51mn")
 
 [node name="Idle" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_npj4n")
-animation = &"right"
+animation = &"down"
 autoplay = "up"
 
 [node name="Move" type="AnimatedSprite2D" parent="Player"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_7w3f3")
-animation = &"down"
+animation = &"up"
 
 [node name="Turn Manager" type="Node2D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("3_lcbp4")
@@ -308,5 +283,32 @@ Player = NodePath("../Player")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("5_5jxyi")
 Player = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health Bar" type="TextureProgressBar" parent="CanvasLayer/Control"]
+offset_left = 12.0001
+offset_top = 11.0001
+offset_right = 60.0001
+offset_bottom = 30.0001
+scale = Vector2(2.92, 2.92)
+texture_under = ExtResource("7_kqxjd")
+texture_progress = ExtResource("8_o5rxp")
+
+[node name="Health Label" type="Label" parent="CanvasLayer/Control/Health Bar"]
+layout_mode = 0
+offset_left = 47.2603
+offset_top = 5.47941
+offset_right = 82.2603
+offset_bottom = 39.4794
+scale = Vector2(0.191781, 0.191781)
+theme_override_font_sizes/font_size = 24
+text = "- %"
 
 [connection signal="animation_finished" from="Player/Move" to="Player" method="OnMoveAnimFinished"]
