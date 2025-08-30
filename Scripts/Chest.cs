@@ -7,48 +7,48 @@ using System;
 // -----------------------------------------------------------------------------
 public partial class Chest() : StaticBody2D
 {
-	[Export] public Inventory PlayerInventory;
+	private Inventory playerInventory;
+	private CanvasLayer uiLayer;
+	private TurnManager turnManager;
 	private Item item = new Carrot();
-	private RayCast2D rayCast;
 	private AnimatedSprite2D openAnim;
+	private Node currentOverlay;
+
 
 	public override void _Ready()
 	{
-		rayCast = GetNode<RayCast2D>("RayCast");
 		openAnim = GetNode<AnimatedSprite2D>("Open");
 		openAnim.Animation = "open";
+
+		playerInventory = GetParent().GetNode<Inventory>("Player/Inventory");
+		uiLayer = GetParent().GetNode<CanvasLayer>("CanvasLayer");
+		turnManager = GetParent().GetNode<TurnManager>("Turn Manager");
 	}
 
-	public override void _Process(double delta)
-	{
-		if (rayCast.IsColliding())
-		{
-			if (rayCast.GetCollider() is Node node)
-			{
-				if (node.Name == "Player")
-				{
-					if (Input.IsActionJustPressed("input_interact"))
-					{
-						Open();
-					}
-				}
-			}
-		}
-	}
 
 	/// <summary>
 	/// Open the chest and give item inside to the player
 	/// </summary>
-	private void Open()
+	public void Open()
 	{
-		openAnim.Visible = true;
-		openAnim.Play();
 		if (item != null)
 		{
-			PlayerInventory.AddItem(item);
-			item.OnAcquired();
-			GD.Print("Chest Opened!");
+			turnManager.NextTurn("open_chest");
+			openAnim.Visible = true;
+			openAnim.Play();
 		}
+		
+	}
+
+	/// <summary>
+	/// Close the chest
+	/// </summary>
+	public void Close()
+	{
+		openAnim.Stop();
+		openAnim.Animation = "close";
+		openAnim.Visible = true;
+		openAnim.Play();
 	}
 
 	/// <summary>
@@ -61,6 +61,22 @@ public partial class Chest() : StaticBody2D
 			// Play stay open animation
 			openAnim.Animation = "stay-open";
 			openAnim.Play(); // Plays on loop until close triggered
+
+			// Instance chest_item_overlay.tscn and add to scene
+			var overlayScene = GD.Load<PackedScene>("res://Scenes/chest_item_overlay.tscn");
+			if (overlayScene != null)
+			{
+				var overlayInstance = overlayScene.Instantiate();
+				var collectButton = overlayInstance.GetNode<ColorRect>("ColorRect").GetNode<Button>("Collect");
+				// Store reference to overlayInstance for later removal
+				this.currentOverlay = overlayInstance;
+				collectButton.Pressed += OnCollectPressed;
+				uiLayer.AddChild(overlayInstance);
+
+				currentOverlay.GetNode<Label>("ColorRect/Item Name").Text = item.ItemName;
+				currentOverlay.GetNode<Label>("ColorRect/Description").Text = item.Description;
+				currentOverlay.GetNode<Sprite2D>("ColorRect/Image").Texture = GD.Load<Texture2D>(item.ImagePath);
+			}
 		}
 		else // Close animation finishes
 		{
@@ -77,6 +93,31 @@ public partial class Chest() : StaticBody2D
 	public Item GetItem()
 	{
 		return this.item;
+	}
+
+	/// <summary>
+	/// When collect button pressed, add item to inventory and other effects
+	/// </summary>
+	public void OnCollectPressed()
+	{
+		// Remove overlay
+		currentOverlay.QueueFree();
+		currentOverlay = null;
+		// Play close animation
+		Close();
+		// Give player item
+		item.OnAcquired();
+		if (item.IsCarryable)
+		{
+			playerInventory.AddItem(item);
+		}
+		GD.Print("Inventory:");
+		foreach (Item i in playerInventory.GetItems())
+		{
+			GD.Print(i.ItemName);
+		}
+		// Remove item from chest
+		item = null;
 	}
 
 }

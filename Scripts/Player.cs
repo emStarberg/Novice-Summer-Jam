@@ -62,6 +62,25 @@ public partial class Player : CharacterBody2D
 		{
 			Hurt(20);
 		}
+		if (Input.IsActionJustPressed("input_interact"))
+		{
+			if (castRight.IsColliding() && castRight.GetCollider() is Chest chestRight)
+			{
+				chestRight.Open();
+			}
+			if (castLeft.IsColliding() && castLeft.GetCollider() is Chest chestLeft)
+			{
+				chestLeft.Open();
+			}
+			if (castUp.IsColliding() && castUp.GetCollider() is Chest chestUp)
+			{
+				chestUp.Open();
+			}
+			if (castDown.IsColliding() && castDown.GetCollider() is Chest chestDown)
+			{
+				chestDown.Open();
+			}
+		}
 	}
 
 	/// <summary>

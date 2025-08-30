@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtbwnbakeqka8"]
+
+[ext_resource type="Texture2D" uid="uid://dwra0kxlwkob1" path="res://Assets/Carrot.png" id="1_h78fc"]
+
+[node name="Chest item overlay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 577.0
+offset_bottom = 324.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 367.0
+offset_top = 184.0
+offset_right = 683.0
+offset_bottom = 391.0
+scale = Vector2(1.36, 1.36)
+color = Color(0.168627, 0.168627, 0.168627, 0.984314)
+
+[node name="Item Name" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 92.6468
+offset_top = 5.88234
+offset_right = 222.647
+offset_bottom = 39.8823
+scale = Vector2(1.01529, 1.01529)
+theme_override_font_sizes/font_size = 24
+text = "Item Name"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 97.7939
+offset_top = 138.97
+offset_right = 280.794
+offset_bottom = 161.97
+scale = Vector2(0.676471, 0.676471)
+text = "Item Description"
+horizontal_alignment = 1
+
+[node name="Collect" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 135.294
+offset_top = 171.323
+offset_right = 212.294
+offset_bottom = 202.323
+scale = Vector2(0.647059, 0.647059)
+text = "COLLECT"
+
+[node name="Image" type="Sprite2D" parent="ColorRect"]
+position = Vector2(161.029, 88.2353)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("1_h78fc")

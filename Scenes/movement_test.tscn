@@ -615,6 +615,7 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." groups=["Floor"]]
+visible = false
 tile_map_data = PackedByteArray("AAAeABMAAAAEAAEAAAAdABMAAAAEAAEAAAAcABMAAAAEAAEAAAAfABMAAAAEAAEAAAAfABIAAAAEAAEAAAAeABIAAAAEAAEAAAAdABIAAAAEAAEAAAAcABIAAAAEAAEAAAAfABQAAAAEAAEAAAAeABQAAAAEAAEAAAAdABQAAAAEAAEAAAAcABQAAAAEAAEAAAAbABQAAAAEAAEAAAAbABMAAAAEAAEAAAAbABIAAAAEAAEAAAAbABEAAAAEAAEAAAAcABEAAAAEAAEAAAAdABEAAAAEAAEAAAAeABEAAAAEAAEAAAAfABEAAAAEAAEAAAAgABEAAAAEAAEAAAAgABIAAAAEAAEAAAAgABMAAAAEAAEAAAAgABQAAAAEAAEAAAAfABUAAAAEAAEAAAAeABUAAAAEAAEAAAAdABUAAAAEAAEAAAAcABUAAAAEAAEAAAAbABUAAAAEAAEAAAAaABUAAAAEAAEAAAAaABQAAAAEAAEAAAAaABMAAAAEAAEAAAAaABIAAAAEAAEAAAAaABEAAAAEAAEAAAAgABUAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_tuftd")
 
@@ -622,7 +623,7 @@ tile_set = SubResource("TileSet_tuftd")
 position = Vector2(424, 344)
 script = ExtResource("1_7bx3r")
 TurnManagerNode = NodePath("../Turn Manager")
-Healthbar = NodePath("../CanvasLayer/Control/Health Bar")
+Healthbar = NodePath("../CanvasLayer/Gameplay UI/Health Bar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 scale = Vector2(1.03142, 1)
@@ -679,14 +680,15 @@ Player = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Gameplay UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 0.467014
+anchor_bottom = 0.436728
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Health Bar" type="TextureProgressBar" parent="CanvasLayer/Control"]
+[node name="Health Bar" type="TextureProgressBar" parent="CanvasLayer/Gameplay UI"]
 layout_mode = 0
 offset_left = 12.0001
 offset_top = 11.0001
@@ -697,7 +699,7 @@ texture_under = ExtResource("7_kqxjd")
 texture_progress = ExtResource("8_o5rxp")
 metadata/_edit_use_anchors_ = true
 
-[node name="Health Label" type="Label" parent="CanvasLayer/Control/Health Bar"]
+[node name="Health Label" type="Label" parent="CanvasLayer/Gameplay UI/Health Bar"]
 layout_mode = 0
 offset_left = 47.2603
 offset_top = 5.47941
@@ -708,11 +710,10 @@ theme_override_font_sizes/font_size = 24
 text = "- %"
 metadata/_edit_use_anchors_ = true
 
-[node name="Chest" type="StaticBody2D" parent="." node_paths=PackedStringArray("PlayerInventory")]
+[node name="Chest" type="StaticBody2D" parent="."]
 position = Vector2(424, 280)
 scale = Vector2(0.806684, 0.806684)
 script = ExtResource("12_npj4n")
-PlayerInventory = NodePath("../Player/Inventory")
 
 [node name="Sprite" type="Sprite2D" parent="Chest"]
 position = Vector2(-2.02656e-06, 3.51667e-06)
@@ -731,9 +732,6 @@ position = Vector2(-1.17421e-05, 5.78165e-06)
 scale = Vector2(1.23964, 1.23964)
 sprite_frames = SubResource("SpriteFrames_lykbi")
 animation = &"open"
-
-[node name="RayCast" type="RayCast2D" parent="Chest"]
-target_position = Vector2(0, 17.355)
 
 [connection signal="animation_finished" from="Player/Animations/Move" to="Player" method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Attack" to="Player" method="OnAttackAnimFinished"]
