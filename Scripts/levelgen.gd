@@ -5,7 +5,7 @@ extends Node
 @export var N: int = 3;
 
 # The size of the outputted level, in NxN cells.
-@export var output_size: Vector2i = Vector2i(100, 100);
+@export var output_size: Vector2i = Vector2i(20, 20);
 
 # The input image to use for wave function collapse. Must be composed of N*N
 # square patterns.
@@ -85,7 +85,7 @@ func output() -> Dictionary[Vector2i, TileMapPattern]:
 	# Returns true if collapse was successful
 	# Randomly collapses a fielxd and updates all neighbors.
 	var collapse := func(coord: Vector2i) -> bool:
-		if !progress.get(coord) != null:
+		if progress.get(coord) == null:
 			return false;
 
 		(progress.get(coord) as Possibilities).collapse()
@@ -104,14 +104,14 @@ func output() -> Dictionary[Vector2i, TileMapPattern]:
 		var update_neighbors := func(coord: Vector2i) -> void:
 			for neighbor_coord: Vector2i in get_neighbors.call(coord):
 				var neighbor: Possibilities = progress.get(neighbor_coord);
-
-				if neighbor.collapsed():
+				if neighbor == null || neighbor.collapsed():
 					continue;
 
 				var neighboring_possibilities: Array = \
 				(get_neighbors.call(coord) as Array[Vector2i]).map(func(a: Vector2i) -> Possibilities:
 					return progress.get(a) as Possibilities;
 				).filter(func(a: Variant) -> bool: return a != null)
+				
 
 				neighbor.update(neighboring_possibilities);
 
@@ -131,21 +131,21 @@ func output() -> Dictionary[Vector2i, TileMapPattern]:
 		for cell in progress:
 			if (progress.get(cell) as Possibilities).entropy() < (progress.get(best) as Possibilities).entropy():
 				best = cell;
-		push_error(best)
 		if (progress.get(best) as Possibilities).collapsed():
 			break;
 		collapse.call(best);
+		assert((progress.get(best) as Possibilities).collapsed())
+		push_error(best)
+		
 	for i in progress:
 		# TODO: Assert they are all valid
 		pass
-
-	var finished := progress.values().map(func(p: Possibilities) -> TileMapPattern: return p.collapsed())
+	var finished := progress.values().map(func(p: Possibilities) -> TileMapPattern: return p.variants.get(0))
 
 	# cant .map() a dictionary :(
 	var result: Dictionary[Vector2i, TileMapPattern];
 	for i in progress:
-		result.set(i, (progress.get(i) as Possibilities).collapsed());
-		
+		result.set(i, (progress.get(i) as Possibilities).variants.get(0));
 	return result;
 
 
@@ -154,10 +154,8 @@ class Possibilities extends Node:
 	var variants: Array[TileMapPattern];
 
 	# Returns the variant. Otherwise null.
-	func collapsed() -> TileMapPattern:
-		if variants.size() == 1 && variants.get(0) != null:
-			return null;
-		return variants.get(0);
+	func collapsed() -> bool:
+		return variants.size() == 1 && variants.get(0) != null
 		
 	@warning_ignore("shadowed_variable")
 	func _init(variants: Array[TileMapPattern]) -> void:
@@ -171,13 +169,13 @@ class Possibilities extends Node:
 		variants = [variants.pick_random()];
 
 	func entropy() -> int:
-		if collapsed():
+		if variants.size() == 1:
 			return 9223372036854775807
 		return variants.size();
 
 	func update(other: Array) -> void:
 		for possibilities: Possibilities in other:
-			possibilities.variants.filter(func(pattern: Possibilities) -> bool: return other.has(pattern))
+			possibilities.variants.filter(func(pattern: TileMapPattern) -> bool: return other.has(pattern))
    
 
 var CellNeighbors: Dictionary[TileMapPattern, ArrayOfPatterns]
