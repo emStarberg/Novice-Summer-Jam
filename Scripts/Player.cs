@@ -11,7 +11,7 @@ public partial class Player : CharacterBody2D
 {
 
 	[Export] public TurnManager TurnManagerNode; // Calls NextTurn() on this whenever the player chooses an action
-	[Export] public TextureProgressBar Healthbar;
+	[Export] public HealthBar Healthbar;
 	private string facing = "left"; // Direction player is facing
 	private AnimatedSprite2D currentAnim, idleAnim, moveAnim, attackAnim, hurtAnim; // Animations
 	private Vector2? moveTarget = null; // For movement between tiles
@@ -40,7 +40,7 @@ public partial class Player : CharacterBody2D
 		castRight = raycastFolder.GetNode<RayCast2D>("CastRight");
 		castUp = raycastFolder.GetNode<RayCast2D>("CastUp");
 		castDown = raycastFolder.GetNode<RayCast2D>("CastDown");
-
+		
 		healthLabel = Healthbar.GetNode<Label>("Health Label");
 	}
 
@@ -49,7 +49,7 @@ public partial class Player : CharacterBody2D
 		HandleMovement(delta);
 		SetFacingAnim();
 		// Update health bar
-		Healthbar.Value = health;
+		Healthbar.SetHealth(health);
 		healthLabel.Text = health + "%";
 
 		if (Input.IsActionJustPressed("ui_accept"))
