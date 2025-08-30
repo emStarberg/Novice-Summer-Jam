@@ -1,28 +1,15 @@
 using Godot;
 using System;
-public partial class Item
+// -----------------------------------------------------------------------------
+// Item.cs
+// Author: Emily Braithwaite
+// Purpose: An item that can be carried in the player's inventory. 
+// -----------------------------------------------------------------------------
+public interface Item
 {
-    private String name;
-    private String description;
-    public Item(String name, String description)
-    {
-        this.name = name;
-        this.description = description;
-    }
+    string ItemName { get; }
+    string Description { get; set; }
 
-    public String GetName()
-    {
-        return this.name;
-    }
-
-    public String GetDescription()
-    {
-        return this.description;
-    }
-
-    public void SetDescription(String set)
-    {
-        this.description = set;
-    }
-
+    public void OnAcquired() { }
+   
 }
