@@ -16,18 +16,29 @@ public partial class Player : CharacterBody2D
 	private float moveSpeed = 64f; // Pixels per second
 	private float health = 100; // Player's health level
 	private Label healthLabel;
+	private Node2D animFolder;
+	private Node2D raycastFolder;
+	private RayCast2D castLeft, castRight, castUp, castDown;
 
 
 	public override void _Ready()
 	{
 		// Set up animations
-		idleAnim = GetNode<AnimatedSprite2D>("Idle");
-		moveAnim = GetNode<AnimatedSprite2D>("Move");
-		attackAnim = GetNode<AnimatedSprite2D>("Attack");
-		hurtAnim = GetNode<AnimatedSprite2D>("Hurt");
+		animFolder = GetNode<Node2D>("Animations");
+		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Idle");
+		moveAnim = animFolder.GetNode<AnimatedSprite2D>("Move");
+		attackAnim = animFolder.GetNode<AnimatedSprite2D>("Attack");
+		hurtAnim = animFolder.GetNode<AnimatedSprite2D>("Hurt");
 		currentAnim = idleAnim;
 		// Connect moveAnim finished signal
 		moveAnim.AnimationFinished += OnMoveAnimFinished;
+
+		// Set up raycasts
+		raycastFolder = GetNode<Node2D>("Raycasts");
+		castLeft = raycastFolder.GetNode<RayCast2D>("CastLeft");
+		castRight = raycastFolder.GetNode<RayCast2D>("CastRight");
+		castUp = raycastFolder.GetNode<RayCast2D>("CastUp");
+		castDown = raycastFolder.GetNode<RayCast2D>("CastDown");
 
 		healthLabel = Healthbar.GetNode<Label>("Health Label");
 	}
@@ -108,31 +119,43 @@ public partial class Player : CharacterBody2D
 		// Only allow new movement if not currently moving
 		if (Input.IsActionJustPressed("ui_right"))
 		{
-			moveTarget = Position + new Vector2(16, 0);
-			TurnManagerNode.NextTurn("right");
 			facing = "right";
-			SwitchAnim(moveAnim);
+			if (!castRight.IsColliding())
+			{
+				moveTarget = Position + new Vector2(16, 0);
+				TurnManagerNode.NextTurn("right");
+				SwitchAnim(moveAnim);
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_left"))
 		{
-			moveTarget = Position + new Vector2(-16, 0);
-			TurnManagerNode.NextTurn("left");
 			facing = "left";
-			SwitchAnim(moveAnim);
+			if (!castLeft.IsColliding())
+			{
+				moveTarget = Position + new Vector2(-16, 0);
+				TurnManagerNode.NextTurn("left");
+				SwitchAnim(moveAnim);
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_down"))
 		{
-			moveTarget = Position + new Vector2(0, 16);
-			TurnManagerNode.NextTurn("down");
 			facing = "down";
-			SwitchAnim(moveAnim);
+			if (!castDown.IsColliding())
+			{
+				moveTarget = Position + new Vector2(0, 16);
+				TurnManagerNode.NextTurn("down");
+				SwitchAnim(moveAnim);
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_up"))
 		{
-			moveTarget = Position + new Vector2(0, -16);
-			TurnManagerNode.NextTurn("up");
 			facing = "up";
-			SwitchAnim(moveAnim);
+			if (!castUp.IsColliding())
+			{
+				moveTarget = Position + new Vector2(0, -16);
+				TurnManagerNode.NextTurn("up");
+				SwitchAnim(moveAnim);
+			}
 		}
 	}
 

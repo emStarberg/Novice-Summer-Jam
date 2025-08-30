@@ -31,6 +31,10 @@ gdscript/warnings/unsafe_void_return=2
 
 project/assembly_name="New Game Project"
 
+[global_group]
+
+Floor=""
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

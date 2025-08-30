@@ -1,13 +1,13 @@
-[gd_scene load_steps=74 format=4 uid="uid://dvrla5v8nyqkm"]
+[gd_scene load_steps=75 format=4 uid="uid://dvrla5v8nyqkm"]
 
-[ext_resource type="Script" uid="uid://6sl2fcfi0hol" path="res://Scripts/Player.cs" id="1_7bx3r"]
+[ext_resource type="Script" uid="uid://ckgidqotrlpng" path="res://Scripts/Player.cs" id="1_7bx3r"]
 [ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_m2jms"]
 [ext_resource type="Texture2D" uid="uid://e56k82lh5eqn" path="res://icon.svg" id="2_lcbp4"]
-[ext_resource type="Script" uid="uid://dit1i48s7ij40" path="res://Scripts/TurnManager.cs" id="3_lcbp4"]
+[ext_resource type="Script" uid="uid://b0k4t6j57q8gt" path="res://Scripts/TurnManager.cs" id="3_lcbp4"]
 [ext_resource type="Texture2D" uid="uid://rqdouckbmf1o" path="res://Assets/RabbitSwordIdle.png" id="3_m2jms"]
 [ext_resource type="Texture2D" uid="uid://dhlbxrkqsabbi" path="res://Assets/RabbitSwordRun.png" id="4_tuftd"]
 [ext_resource type="Texture2D" uid="uid://cuxtacmbjjsos" path="res://Assets/RabbitVerticalAttack.png" id="5_3bqs1"]
-[ext_resource type="Script" uid="uid://darsdu3vjuwxh" path="res://Scripts/Camera.cs" id="5_5jxyi"]
+[ext_resource type="Script" uid="uid://hf3ax7k4460n" path="res://Scripts/Camera.cs" id="5_5jxyi"]
 [ext_resource type="Texture2D" uid="uid://628c68q2b37t" path="res://Assets/RabbitHorizontalAttack.png" id="6_plb23"]
 [ext_resource type="Texture2D" uid="uid://clniu6vdvucty" path="res://Assets/Power Meter - Base.png" id="7_kqxjd"]
 [ext_resource type="Texture2D" uid="uid://hbar3x5y2y00" path="res://Assets/RabbitTakeDamage.png" id="7_plb23"]
@@ -539,42 +539,62 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ou3lj"]
+size = Vector2(20, 19.9171)
+
 [node name="Node2D" type="Node2D"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["Floor"]]
 tile_map_data = PackedByteArray("AAAeABMAAAAEAAEAAAAdABMAAAAEAAEAAAAcABMAAAAEAAEAAAAfABMAAAAEAAEAAAAfABIAAAAEAAEAAAAeABIAAAAEAAEAAAAdABIAAAAEAAEAAAAcABIAAAAEAAEAAAAfABQAAAAEAAEAAAAeABQAAAAEAAEAAAAdABQAAAAEAAEAAAAcABQAAAAEAAEAAAAbABQAAAAEAAEAAAAbABMAAAAEAAEAAAAbABIAAAAEAAEAAAAbABEAAAAEAAEAAAAcABEAAAAEAAEAAAAdABEAAAAEAAEAAAAeABEAAAAEAAEAAAAfABEAAAAEAAEAAAAgABEAAAAEAAEAAAAgABIAAAAEAAEAAAAgABMAAAAEAAEAAAAgABQAAAAEAAEAAAAfABUAAAAEAAEAAAAeABUAAAAEAAEAAAAdABUAAAAEAAEAAAAcABUAAAAEAAEAAAAbABUAAAAEAAEAAAAaABUAAAAEAAEAAAAaABQAAAAEAAEAAAAaABMAAAAEAAEAAAAaABIAAAAEAAEAAAAaABEAAAAEAAEAAAAgABUAAAAEAAEAAAA=")
 tile_set = SubResource("TileSet_tuftd")
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode", "Healthbar")]
-position = Vector2(480, 310)
+position = Vector2(424, 344)
 script = ExtResource("1_7bx3r")
 TurnManagerNode = NodePath("../Turn Manager")
 Healthbar = NodePath("../CanvasLayer/Control/Health Bar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+scale = Vector2(1.03142, 1)
 shape = SubResource("RectangleShape2D_e51mn")
 
-[node name="Idle" type="AnimatedSprite2D" parent="Player"]
+[node name="Animations" type="Node2D" parent="Player"]
+
+[node name="Idle" type="AnimatedSprite2D" parent="Player/Animations"]
 sprite_frames = SubResource("SpriteFrames_npj4n")
 animation = &"down"
 autoplay = "up"
 
-[node name="Move" type="AnimatedSprite2D" parent="Player"]
+[node name="Move" type="AnimatedSprite2D" parent="Player/Animations"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_7w3f3")
 animation = &"up"
 
-[node name="Attack" type="AnimatedSprite2D" parent="Player"]
+[node name="Attack" type="AnimatedSprite2D" parent="Player/Animations"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_16s1j")
 animation = &"up"
 frame = 5
 frame_progress = 1.0
 
-[node name="Hurt" type="AnimatedSprite2D" parent="Player"]
+[node name="Hurt" type="AnimatedSprite2D" parent="Player/Animations"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_astm7")
 animation = &"down"
+
+[node name="Raycasts" type="Node2D" parent="Player"]
+
+[node name="CastDown" type="RayCast2D" parent="Player/Raycasts"]
+target_position = Vector2(0, 18)
+
+[node name="CastUp" type="RayCast2D" parent="Player/Raycasts"]
+target_position = Vector2(0, -18)
+
+[node name="CastLeft" type="RayCast2D" parent="Player/Raycasts"]
+target_position = Vector2(-20, 0)
+
+[node name="CastRight" type="RayCast2D" parent="Player/Raycasts"]
+target_position = Vector2(21, 0)
 
 [node name="Turn Manager" type="Node2D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("3_lcbp4")
@@ -616,13 +636,17 @@ text = "- %"
 metadata/_edit_use_anchors_ = true
 
 [node name="Chest" type="StaticBody2D" parent="."]
+position = Vector2(424, 280)
+scale = Vector2(0.806684, 0.806684)
 
 [node name="Sprite" type="Sprite2D" parent="Chest"]
 scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("2_lcbp4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chest"]
+position = Vector2(0, -0.0414124)
+shape = SubResource("RectangleShape2D_ou3lj")
 
-[connection signal="animation_finished" from="Player/Move" to="Player" method="OnMoveAnimFinished"]
-[connection signal="animation_finished" from="Player/Attack" to="Player" method="OnAttackAnimFinished"]
-[connection signal="animation_finished" from="Player/Hurt" to="Player" method="OnHurtAnimFinished"]
+[connection signal="animation_finished" from="Player/Animations/Move" to="Player" method="OnMoveAnimFinished"]
+[connection signal="animation_finished" from="Player/Animations/Attack" to="Player" method="OnAttackAnimFinished"]
+[connection signal="animation_finished" from="Player/Animations/Hurt" to="Player" method="OnHurtAnimFinished"]
