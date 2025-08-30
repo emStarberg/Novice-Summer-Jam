@@ -1,22 +1,41 @@
 using Godot;
 using System;
-
+// -----------------------------------------------------------------------------
+// Player.cs
+// Author: Emily Braithwaite
+// Purpose: Manages player movement and other actions/controls.
+// -----------------------------------------------------------------------------
 public partial class Player : CharacterBody2D
 {
-	// Speed of the player movement
-	[Export] public float Speed = 200f;
+	[Export]
+	public TurnManager TurnManagerNode; // Calls NextTurn() on this whenever the player chooses an action
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Vector2.Zero;
-
+		// *** Handle Movement *** //
+		// Move right
 		if (Input.IsActionJustPressed("ui_right"))
+		{
 			Position += new Vector2(16, 0);
+			TurnManagerNode.NextTurn("right");
+		}
+		// Move left
 		if (Input.IsActionJustPressed("ui_left"))
+		{
 			Position += new Vector2(-16, 0);
+			TurnManagerNode.NextTurn("left");
+		}
+		// Move down
 		if (Input.IsActionJustPressed("ui_down"))
+		{
 			Position += new Vector2(0, 16);
+			TurnManagerNode.NextTurn("down");
+		}
+		// Move up
 		if (Input.IsActionJustPressed("ui_up"))
+		{
 			Position += new Vector2(0, -16);
+			TurnManagerNode.NextTurn("up");
+		}
 	}
 }
