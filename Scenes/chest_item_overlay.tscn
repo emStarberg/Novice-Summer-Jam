@@ -48,6 +48,6 @@ scale = Vector2(0.647059, 0.647059)
 text = "COLLECT"
 
 [node name="Image" type="Sprite2D" parent="ColorRect"]
-position = Vector2(161.029, 88.2353)
-scale = Vector2(0.04, 0.04)
+position = Vector2(160.294, 87.5)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_h78fc")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=4 uid="uid://dvrla5v8nyqkm"]
+[gd_scene load_steps=84 format=4 uid="uid://dvrla5v8nyqkm"]
 
 [ext_resource type="Script" uid="uid://ddmv8finoosl0" path="res://Scripts/Player.cs" id="1_7bx3r"]
 [ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_m2jms"]
@@ -11,9 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://hbar3x5y2y00" path="res://Assets/RabbitTakeDamage.png" id="7_plb23"]
 [ext_resource type="Script" uid="uid://bk01agsh4gwoo" path="res://Scripts/Inventory.cs" id="8_tpxdn"]
 [ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_npj4n"]
-[ext_resource type="Script" uid="uid://mr57ws5k4vlb" path="res://Scripts/Chest.cs" id="12_npj4n"]
 [ext_resource type="Script" uid="uid://dr885tblx8ynp" path="res://Scripts/HealthBar.cs" id="12_tpxdn"]
-[ext_resource type="Texture2D" uid="uid://cm8dp0arja355" path="res://Assets/treasureChest.png" id="14_tpxdn"]
+[ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="13_npj4n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jxyi"]
 texture = ExtResource("1_m2jms")
@@ -605,77 +604,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ou3lj"]
-size = Vector2(19.9171, 19.9171)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_astm7"]
-atlas = ExtResource("14_tpxdn")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uf7k1"]
-atlas = ExtResource("14_tpxdn")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gs2od"]
-atlas = ExtResource("14_tpxdn")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e5nop"]
-atlas = ExtResource("14_tpxdn")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_68kjo"]
-atlas = ExtResource("14_tpxdn")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_lykbi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_astm7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uf7k1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gs2od")
-}],
-"loop": false,
-"name": &"close",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gs2od")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uf7k1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_astm7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e5nop")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_68kjo")
-}],
-"loop": false,
-"name": &"open",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_astm7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e5nop")
-}],
-"loop": true,
-"name": &"stay-open",
-"speed": 5.0
-}]
-
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." groups=["Floor"]]
@@ -759,37 +687,16 @@ sprite_frames = SubResource("SpriteFrames_qfdfo")
 script = ExtResource("12_tpxdn")
 
 [node name="Health Label" type="Label" parent="CanvasLayer/Gameplay UI/Health Bar"]
-offset_left = -11.0769
-offset_top = 3.69231
-offset_right = 28.9231
-offset_bottom = 26.6923
+offset_left = -11.2977
+offset_top = 3.47622
+offset_right = 28.7023
+offset_bottom = 26.4762
 scale = Vector2(0.677087, 0.677087)
 text = "- %"
 
-[node name="Chest" type="StaticBody2D" parent="."]
+[node name="Chest" parent="." instance=ExtResource("13_npj4n")]
 position = Vector2(424, 280)
-scale = Vector2(0.806684, 0.806684)
-script = ExtResource("12_npj4n")
-
-[node name="Sprite" type="Sprite2D" parent="Chest"]
-position = Vector2(-2.02656e-06, 3.51667e-06)
-scale = Vector2(1.23964, 1.23964)
-texture = ExtResource("14_tpxdn")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest"]
-visible = false
-position = Vector2(0.0414429, -0.0413818)
-shape = SubResource("RectangleShape2D_ou3lj")
-
-[node name="Open" type="AnimatedSprite2D" parent="Chest"]
-position = Vector2(-1.17421e-05, 5.78165e-06)
-scale = Vector2(1.23964, 1.23964)
-sprite_frames = SubResource("SpriteFrames_lykbi")
-animation = &"open"
 
 [connection signal="animation_finished" from="Player/Animations/Move" to="Player" method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Attack" to="Player" method="OnAttackAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Hurt" to="Player" method="OnHurtAnimFinished"]
-[connection signal="animation_finished" from="Chest/Open" to="Chest" method="OnOpenAnimFinished"]
