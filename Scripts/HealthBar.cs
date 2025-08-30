@@ -11,7 +11,7 @@ public partial class HealthBar : AnimatedSprite2D
 
 	public override void _Process(double delta)
 	{
-        // Change frames depending on health level. (100/8 frames = 12.5)
+		// Change frames depending on health level. (100/8 frames = 12.5)
 		int frame = 0;
 		if (health > 0)
 		{
