@@ -11,7 +11,7 @@ public partial class Player : CharacterBody2D
 	[Export] public TurnManager TurnManagerNode; // Calls NextTurn() on this whenever the player chooses an action
 	[Export] public TextureProgressBar Healthbar;
 	private string facing = "left"; // Direction player is facing
-	private AnimatedSprite2D currentAnim, idleAnim, moveAnim, attackAnim; // Animations
+	private AnimatedSprite2D currentAnim, idleAnim, moveAnim, attackAnim, hurtAnim; // Animations
 	private Vector2? moveTarget = null; // For movement between tiles
 	private float moveSpeed = 64f; // Pixels per second
 	private float health = 100; // Player's health level
@@ -24,6 +24,7 @@ public partial class Player : CharacterBody2D
 		idleAnim = GetNode<AnimatedSprite2D>("Idle");
 		moveAnim = GetNode<AnimatedSprite2D>("Move");
 		attackAnim = GetNode<AnimatedSprite2D>("Attack");
+		hurtAnim = GetNode<AnimatedSprite2D>("Hurt");
 		currentAnim = idleAnim;
 		// Connect moveAnim finished signal
 		moveAnim.AnimationFinished += OnMoveAnimFinished;
@@ -42,6 +43,10 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
 			Attack();
+		}
+		else if (Input.IsActionJustPressed("ui_text_indent"))
+		{
+			Hurt(20);
 		}
 	}
 
@@ -138,6 +143,7 @@ public partial class Player : CharacterBody2D
 	public void Hurt(float amount)
 	{
 		health -= amount;
+		SwitchAnim(hurtAnim);
 	}
 
 	/// <summary>
@@ -152,6 +158,14 @@ public partial class Player : CharacterBody2D
 	/// When attack animation finishes, return to idle animation
 	/// </summary>
 	public void OnAttackAnimFinished()
+	{
+		SwitchAnim(idleAnim);
+	}
+
+	/// <summary>
+	/// When hurt animation finishes, return to idle animation
+	/// </summary>
+	public void OnHurtAnimFinished()
 	{
 		SwitchAnim(idleAnim);
 	}
