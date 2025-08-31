@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=3 uid="uid://npgtqaxmg766"]
+[gd_scene load_steps=157 format=3 uid="uid://npgtqaxmg766"]
 
 [ext_resource type="Script" uid="uid://kvin8xcxii1f" path="res://Scripts/Player.cs" id="1_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://doq8g3ib80ncb" path="res://Assets/RabbitIdle.png" id="2_tx1dd"]
@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://b21tqug88550q" path="res://audio/Walking_On_Grass_Slow.wav" id="14_fd4e3"]
 [ext_resource type="AudioStream" uid="uid://dy8wmkke7oyfc" path="res://audio/Hit_Enamy_2.wav" id="15_qqcod"]
 [ext_resource type="AudioStream" uid="uid://uoky0t6mytcg" path="res://audio/Slash2.wav" id="16_igrcy"]
-[ext_resource type="Script" uid="uid://deo3mmjf8iodc" path="res://Scenes/fog.gd" id="17_qqcod"]
+[ext_resource type="Script" uid="uid://deo3mmjf8iodc" path="res://fog.gd" id="17_qqcod"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e51mn"]
 size = Vector2(16, 16)
@@ -1150,6 +1150,8 @@ animations = [{
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igrcy"]
 blend_mode = 3
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_igrcy"]
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_f1ek2")
 
@@ -1160,7 +1162,6 @@ shape = SubResource("RectangleShape2D_e51mn")
 [node name="Animations" type="Node2D" parent="."]
 
 [node name="Idle" type="AnimatedSprite2D" parent="Animations"]
-position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_npj4n")
 animation = &"sweater_down"
 autoplay = "right"
@@ -1214,14 +1215,15 @@ stream = ExtResource("15_qqcod")
 stream = ExtResource("16_igrcy")
 
 [node name="Fog" type="Sprite2D" parent="."]
-visible = false
 top_level = true
+z_index = 3
 material = SubResource("CanvasItemMaterial_igrcy")
+position = Vector2(0.5, 0.5)
+texture = SubResource("PlaceholderTexture2D_igrcy")
 centered = false
 script = ExtResource("17_qqcod")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
 
 [connection signal="animation_finished" from="Animations/Move" to="." method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Animations/Attack" to="." method="OnAttackAnimFinished"]

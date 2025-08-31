@@ -3,8 +3,8 @@ extends Sprite2D
 const LightTexture = preload("res://Assets/Light.png")
 const GRID_SIZE = 16
 
-var display_width:int = ProjectSettings.get("display/window/size/viewport_width")
-var display_height:int = ProjectSettings.get("display/window/size/viewport_height")
+var display_width:int = 1000
+var display_height:int = 1000
 
 var fogImage:Image = Image.new()
 var fogTexture:ImageTexture = ImageTexture.new()
