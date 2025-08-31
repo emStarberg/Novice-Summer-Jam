@@ -1,4 +1,7 @@
+
+
 [gd_scene load_steps=2 format=4 uid="uid://c8qdk8tf1883l"]
+
 
 [ext_resource type="Script" uid="uid://dr4j0dcseu5yl" path="res://Scripts/levelgen.gd" id="1_w8fqg"]
 

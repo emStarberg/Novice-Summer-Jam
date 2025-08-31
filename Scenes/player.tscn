@@ -1,6 +1,6 @@
 
-[gd_scene load_steps=142 format=3 uid="uid://npgtqaxmg766"]
 
+[gd_scene load_steps=142 format=3 uid="uid://npgtqaxmg766"]
 
 [ext_resource type="Script" uid="uid://dp115b1hglw5j" path="res://Scripts/Player.cs" id="1_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://doq8g3ib80ncb" path="res://Assets/RabbitIdle.png" id="2_tx1dd"]
@@ -1222,6 +1222,7 @@ top_level = true
 material = SubResource("CanvasItemMaterial_igrcy")
 centered = false
 script = ExtResource("17_qqcod")
+
 
 [connection signal="animation_finished" from="Animations/Move" to="." method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Animations/Attack" to="." method="OnAttackAnimFinished"]
