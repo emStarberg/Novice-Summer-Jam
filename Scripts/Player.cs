@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 // -----------------------------------------------------------------------------
 // Player.cs
 // Author: Emily Braithwaite
@@ -10,8 +11,8 @@ using System.Collections.Generic;
 public partial class Player : CharacterBody2D
 {
 
-	[Export] public TurnManager TurnManagerNode; // Calls NextTurn() on this whenever the player chooses an action
-	[Export] public HealthBar Healthbar;
+	private TurnManager TurnManagerNode; // Calls NextTurn() on this whenever the player chooses an action
+	private HealthBar Healthbar;
 	private string facing = "left"; // Direction player is facing
 	private AnimatedSprite2D currentAnim, idleAnim, moveAnim, attackAnim, hurtAnim; // Animations
 	private Vector2? moveTarget = null; // For movement between tiles
@@ -20,11 +21,13 @@ public partial class Player : CharacterBody2D
 	private Label healthLabel;
 	private Node2D animFolder, raycastFolder;
 	private RayCast2D castLeft, castRight, castUp, castDown;
-
+	private bool HoldingSword = false;
 
 	public override void _Ready()
 	{
 		// Set up animations
+		TurnManagerNode = (TurnManager)GetParent().GetNode<Node2D>("Turn Manager");
+		Healthbar = (HealthBar)GetParent().GetNode<AnimatedSprite2D>("CanvasLayer/Gameplay UI/Health Bar");
 		animFolder = GetNode<Node2D>("Animations");
 		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Idle");
 		moveAnim = animFolder.GetNode<AnimatedSprite2D>("Move");
@@ -40,7 +43,7 @@ public partial class Player : CharacterBody2D
 		castRight = raycastFolder.GetNode<RayCast2D>("CastRight");
 		castUp = raycastFolder.GetNode<RayCast2D>("CastUp");
 		castDown = raycastFolder.GetNode<RayCast2D>("CastDown");
-		
+
 		healthLabel = Healthbar.GetNode<Label>("Health Label");
 	}
 
@@ -52,7 +55,7 @@ public partial class Player : CharacterBody2D
 		Healthbar.SetHealth(health);
 		healthLabel.Text = health + "%";
 
-		if (Input.IsActionJustPressed("ui_accept"))
+		if (Input.IsActionJustPressed("ui_accept") && HoldingSword)
 		{
 			Attack();
 			TurnManagerNode.NextTurn("attack");
@@ -88,7 +91,16 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	private void SetFacingAnim()
 	{
-		currentAnim.Animation = facing;
+		if (HoldingSword)
+		{
+			currentAnim.Animation = "sword_" + facing;
+
+		}
+		else
+		{
+			currentAnim.Animation = facing;
+		}
+
 	}
 
 	/// <summary>
@@ -213,5 +225,10 @@ public partial class Player : CharacterBody2D
 	public void OnHurtAnimFinished()
 	{
 		SwitchAnim(idleAnim);
+	}
+
+	public void GiveSword()
+	{
+		HoldingSword = true;
 	}
 }
