@@ -1,0 +1,201 @@
+[gd_scene load_steps=17 format=3 uid="uid://8omd4kumywna"]
+
+[ext_resource type="PackedScene" uid="uid://npgtqaxmg766" path="res://Scenes/player.tscn" id="1_v12fy"]
+[ext_resource type="Script" uid="uid://db2ute4payr2m" path="res://Scripts/TurnManager.cs" id="9_s1r7n"]
+[ext_resource type="Script" uid="uid://bglc4q3tp2kql" path="res://Scripts/Camera.cs" id="10_hkphs"]
+[ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_wkwwd"]
+[ext_resource type="Script" uid="uid://db27fniwtku1f" path="res://Scripts/HealthBar.cs" id="12_4xhmh"]
+[ext_resource type="Texture2D" uid="uid://bumj5h1w5aagi" path="res://Assets/inventoryTile.png" id="13_o4715"]
+[ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="14_chy34"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lykbi"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwpd1"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skk2t"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 32, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehtim"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 48, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2j61q"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 64, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq6go"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 80, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynos4"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 96, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yivmy"]
+atlas = ExtResource("11_wkwwd")
+region = Rect2(0, 112, 64, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qfdfo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lykbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwpd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skk2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehtim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2j61q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq6go")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynos4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yivmy")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D2" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_v12fy")]
+position = Vector2(424, 344)
+
+[node name="Turn Manager" type="Node2D" parent="."]
+script = ExtResource("9_s1r7n")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("10_hkphs")
+Player = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Gameplay UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 0.467014
+anchor_bottom = 0.436728
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Health Bar" type="AnimatedSprite2D" parent="CanvasLayer/Gameplay UI"]
+position = Vector2(102, 55)
+scale = Vector2(2.30135, 2.30135)
+sprite_frames = SubResource("SpriteFrames_qfdfo")
+script = ExtResource("12_4xhmh")
+
+[node name="Health Label" type="Label" parent="CanvasLayer/Gameplay UI/Health Bar"]
+offset_left = -11.2977
+offset_top = 3.47622
+offset_right = 28.7023
+offset_bottom = 26.4762
+scale = Vector2(0.677087, 0.677087)
+text = "- %"
+metadata/_edit_use_anchors_ = true
+
+[node name="Inventory" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Tile0" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 1056.0
+offset_top = 27.0
+offset_right = 1072.0
+offset_bottom = 43.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_o4715")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Inventory/Tile0"]
+position = Vector2(8, 8)
+scale = Vector2(0.382812, 0.382812)
+
+[node name="Tile1" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 1056.0
+offset_top = 91.0
+offset_right = 1072.0
+offset_bottom = 107.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_o4715")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Inventory/Tile1"]
+position = Vector2(8, 8)
+scale = Vector2(0.382812, 0.382812)
+
+[node name="Tile2" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 1056.0
+offset_top = 155.0
+offset_right = 1072.0
+offset_bottom = 171.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_o4715")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Inventory/Tile2"]
+position = Vector2(8, 8)
+scale = Vector2(0.382812, 0.382812)
+
+[node name="Tile3" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 1056.0
+offset_top = 219.0
+offset_right = 1072.0
+offset_bottom = 235.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_o4715")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Inventory/Tile3"]
+position = Vector2(8, 8)
+scale = Vector2(0.382812, 0.382812)
+
+[node name="Tile4" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 1056.0
+offset_top = 283.0
+offset_right = 1072.0
+offset_bottom = 299.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_o4715")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Inventory/Tile4"]
+position = Vector2(8, 8)
+scale = Vector2(0.382812, 0.382812)
+
+[node name="Tile5" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 1056.0
+offset_top = 347.0
+offset_right = 1072.0
+offset_bottom = 363.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_o4715")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Inventory/Tile5"]
+position = Vector2(8, 8)
+scale = Vector2(0.382812, 0.382812)
+
+[node name="Chest2" parent="." instance=ExtResource("14_chy34")]
+position = Vector2(467, 280)
+
+[node name="Chest" parent="." instance=ExtResource("14_chy34")]
+position = Vector2(424, 280)

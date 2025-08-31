@@ -10,13 +10,17 @@ public partial class Chest() : StaticBody2D
 	private Inventory playerInventory;
 	private CanvasLayer uiLayer;
 	private TurnManager turnManager;
-	private Item item = new Carrot();
+
+	// FOR TESTING PURPOSES
+	private Item item = new Sweater();
+
 	private AnimatedSprite2D openAnim;
 	private Node currentOverlay;
-
+	private AudioStreamPlayer2D audio;
 
 	public override void _Ready()
 	{
+		audio = GetNode<AudioStreamPlayer2D>("Audio");
 		openAnim = GetNode<AnimatedSprite2D>("Open");
 		openAnim.Animation = "open";
 
@@ -33,6 +37,7 @@ public partial class Chest() : StaticBody2D
 	{
 		if (item != null)
 		{
+			audio.Play();
 			turnManager.NextTurn("open_chest");
 			openAnim.Visible = true;
 			openAnim.Play();
@@ -85,7 +90,10 @@ public partial class Chest() : StaticBody2D
 			openAnim.Visible = false;
 		}
 	}
-
+	
+	/// <summary>
+	/// Sets the item inside the chest. Should be called on instantiate
+	/// </summary>
 	public void SetItem(Item setItem)
 	{
 		this.item = setItem;
@@ -111,6 +119,15 @@ public partial class Chest() : StaticBody2D
 		{
 			playerInventory.AddItem(item);
 		}
+		else
+		{
+			if (item.ItemName == "Carrot")
+			{
+				playerInventory.GetPlayer().Heal(20f);
+			}
+		}
+
+
 		GD.Print("Inventory:");
 		foreach (Item i in playerInventory.GetItems())
 		{

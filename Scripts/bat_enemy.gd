@@ -21,6 +21,7 @@ var player: CharacterBody2D = null
 var attack_cooldown: float = 5.0   # idle after attack (seconds)
 var can_attack: bool = true
 var is_attacking: bool = false
+@onready var batAudio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 # --- Sprites ---
 @onready var idle_sprite: AnimatedSprite2D = $Animations/Idle
@@ -165,6 +166,32 @@ func _update_sprite() -> void:
 		attack_sprite.visible = false
 
 # --- Detection area signals ---
+	
+	new_pos += direction * speed * move_interval
+	batAudio.play()
+
+	if not player_chase:
+		if new_pos.x < 0:
+			new_pos.x = 0
+			direction.x *= -1
+		elif new_pos.x > screen_size.x:
+			new_pos.x = screen_size.x
+			direction.x *= -1
+
+		if new_pos.y < 0:
+			new_pos.y = 0
+			direction.y *= -1
+		elif new_pos.y > screen_size.y:
+			new_pos.y = screen_size.y
+			direction.y *= -1
+
+	global_position = new_pos
+
+func _on_change_direction() -> void:
+	if not player_chase:
+		var angle: float = randf() * TAU
+		direction = Vector2(cos(angle), sin(angle)).normalized()
+    
 func _on_detection_area_body_entered(body: Node) -> void:
 	if body.is_in_group("player") and body is CharacterBody2D:
 		player = body as CharacterBody2D

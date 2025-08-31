@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://c4rt060b5ygr3" path="res://Scripts/Camera.cs" id="10_jstow"]
 [ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_qxyhj"]
 [ext_resource type="Script" uid="uid://c344u4ry61ufo" path="res://Scripts/HealthBar.cs" id="12_8qqp2"]
+[ext_resource type="Script" uid="uid://dp115b1hglw5j" path="res://Scripts/Player.cs" id="2_y3sds"]
+[ext_resource type="Texture2D" uid="uid://e56k82lh5eqn" path="res://icon.svg" id="3_y4d4i"]
+[ext_resource type="Script" uid="uid://db2ute4payr2m" path="res://Scripts/TurnManager.cs" id="4_vp7fm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jtcqy"]
 texture = ExtResource("1_iax1w")
