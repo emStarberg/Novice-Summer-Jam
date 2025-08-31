@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw8go72tquyp2"
-path="res://.godot/imported/BatStandard_Attack.png-33b046ab7fa67f20299935ae18bd5cde.ctex"
+uid="uid://boe8mf50pobu3"
+path="res://.godot/imported/BatDeath.png-4548410b82b8df8077d24cf85aaf7849.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Standard/BatStandard_Attack.png"
-dest_files=["res://.godot/imported/BatStandard_Attack.png-33b046ab7fa67f20299935ae18bd5cde.ctex"]
+source_file="res://Assets/BatDeath.png"
+dest_files=["res://.godot/imported/BatDeath.png-4548410b82b8df8077d24cf85aaf7849.ctex"]
 
 [params]
 

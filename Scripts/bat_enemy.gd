@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 # --- Movement state ---
 var direction: Vector2 = Vector2.ZERO        # Current moving direction
-var last_direction: Vector2 = Vector2(0, 1) # Last move direction for idle facing
+var last_direction: Vector2 = Vector2(0, 1)  # Last move direction for idle facing
 var move_target: Vector2 = Vector2.ZERO      # Target position for smooth movement
 var is_moving: bool = false                  # Currently moving
 
@@ -15,11 +15,19 @@ var is_moving: bool = false                  # Currently moving
 var player_chase: bool = false
 var player: CharacterBody2D = null
 @onready var detection_area: Area2D = $DetectionArea
+@onready var attack_area: Area2D = $AttackArea
+
+# --- Attack state ---
+var attack_cooldown: float = 5.0   # idle after attack (seconds)
+var can_attack: bool = true
+var is_attacking: bool = false
 
 # --- Sprites ---
 @onready var idle_sprite: AnimatedSprite2D = $Animations/Idle
 @onready var movement_sprite: AnimatedSprite2D = $Animations/Movement
+@onready var attack_sprite: AnimatedSprite2D = $Animations/Attack
 
+# --- Setup ---
 func _ready() -> void:
 	randomize()
 	player = get_tree().get_first_node_in_group("player") as CharacterBody2D
@@ -31,6 +39,15 @@ func _ready() -> void:
 	if not detection_area.is_connected("body_exited", Callable(self, "_on_detection_area_body_exited")):
 		detection_area.body_exited.connect(Callable(self, "_on_detection_area_body_exited"))
 
+	# Connect attack area
+	if not attack_area.is_connected("body_entered", Callable(self, "_on_attack_area_body_entered")):
+		attack_area.body_entered.connect(Callable(self, "_on_attack_area_body_entered"))
+
+	# Connect attack animation end
+	if not attack_sprite.is_connected("animation_finished", Callable(self, "_on_attack_anim_finished")):
+		attack_sprite.animation_finished.connect(Callable(self, "_on_attack_anim_finished"))
+
+# --- Movement ---
 func _physics_process(delta: float) -> void:
 	if is_moving:
 		var distance: Vector2 = move_target - global_position
@@ -43,12 +60,18 @@ func _physics_process(delta: float) -> void:
 		else:
 			global_position += step
 
-	_update_sprite()
+	if not is_attacking:
+		_update_sprite()
 
 # --- Called by TurnManager when it is the enemy's turn ---
 func TakeTurn() -> void:
-	if is_moving:
-		return # Wait until current move finishes
+	if is_moving or is_attacking:
+		return # Wait until current action finishes
+
+	# Already close enough to attack?
+	if player and attack_area.overlaps_body(player):
+		_attack_player(player)
+		return
 
 	# Determine movement direction
 	if player_chase and player:
@@ -71,6 +94,49 @@ func TakeTurn() -> void:
 
 	is_moving = true
 
+# --- Attacking ---
+func _on_attack_area_body_entered(body: Node) -> void:
+	if body.is_in_group("player") and body is CharacterBody2D:
+		_attack_player(body as CharacterBody2D)
+
+func _attack_player(target: CharacterBody2D) -> void:
+	if can_attack:
+		is_attacking = true
+		can_attack = false
+
+		# Deal damage
+		if target.has_method("Hurt"):
+			target.call("Hurt", 10.0)
+
+		# Play attack animation in correct direction
+		var dir_str: String = "down"
+		if last_direction.x < 0:
+			dir_str = "left"
+		elif last_direction.x > 0:
+			dir_str = "right"
+		elif last_direction.y < 0:
+			dir_str = "up"
+		elif last_direction.y > 0:
+			dir_str = "down"
+
+		attack_sprite.animation = dir_str
+		attack_sprite.visible = true
+		attack_sprite.play()
+		idle_sprite.visible = false
+		movement_sprite.visible = false
+
+# --- After attack animation finishes ---
+func _on_attack_anim_finished() -> void:
+	attack_sprite.visible = false
+	is_attacking = false
+
+	# Go into idle state for cooldown
+	_update_sprite()
+	await get_tree().create_timer(attack_cooldown).timeout
+
+	# Reset attack cooldown so it can attack again later
+	can_attack = true
+
 # --- Update sprites based on movement and direction ---
 func _update_sprite() -> void:
 	var dir_str: String = "down"
@@ -90,16 +156,17 @@ func _update_sprite() -> void:
 		movement_sprite.visible = true
 		movement_sprite.play()
 		idle_sprite.visible = false
+		attack_sprite.visible = false
 	else:
 		idle_sprite.animation = dir_str
 		idle_sprite.visible = true
 		idle_sprite.play()
 		movement_sprite.visible = false
-
+		attack_sprite.visible = false
 
 # --- Detection area signals ---
 func _on_detection_area_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and body is CharacterBody2D:
 		player = body as CharacterBody2D
 		player_chase = true
 

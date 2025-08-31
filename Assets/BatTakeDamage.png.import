@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqdbfi4rdkmaq"
-path="res://.godot/imported/BatStandard_Sleeping.png-731fd37458021d3c095bbba87cdc5d4b.ctex"
+uid="uid://236m1lbu0q51"
+path="res://.godot/imported/BatTakeDamage.png-464491a1f508771e10fe6c3c557f3698.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Standard/BatStandard_Sleeping.png"
-dest_files=["res://.godot/imported/BatStandard_Sleeping.png-731fd37458021d3c095bbba87cdc5d4b.ctex"]
+source_file="res://Assets/BatTakeDamage.png"
+dest_files=["res://.godot/imported/BatTakeDamage.png-464491a1f508771e10fe6c3c557f3698.ctex"]
 
 [params]
 

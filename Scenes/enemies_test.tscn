@@ -623,7 +623,7 @@ position = Vector2(226, 187)
 [node name="BatEnemy3" parent="EnemyContainer" instance=ExtResource("1_y8hff")]
 position = Vector2(404, 94)
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode", "Healthbar")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode", "Healthbar") groups=["player"]]
 position = Vector2(424, 167)
 script = ExtResource("2_iax1w")
 TurnManagerNode = NodePath("../Turn Manager")
