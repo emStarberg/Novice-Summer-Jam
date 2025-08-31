@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsbgun0yywos1"]
+[gd_scene load_steps=11 format=3 uid="uid://bsbgun0yywos1"]
 
 [ext_resource type="Script" uid="uid://mr57ws5k4vlb" path="res://Scripts/Chest.cs" id="1_8uwsg"]
 [ext_resource type="Texture2D" uid="uid://cm8dp0arja355" path="res://Assets/treasureChest.png" id="2_bp1or"]
+[ext_resource type="AudioStream" uid="uid://dqw3kcctfjrtg" path="res://audio/chestOpening.wav" id="3_bagqn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ou3lj"]
 size = Vector2(14, 13)
@@ -93,5 +94,8 @@ position = Vector2(-1.17421e-05, 5.78165e-06)
 scale = Vector2(1.23964, 1.23964)
 sprite_frames = SubResource("SpriteFrames_lykbi")
 animation = &"open"
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bagqn")
 
 [connection signal="animation_finished" from="Open" to="." method="OnOpenAnimFinished"]
