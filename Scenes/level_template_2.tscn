@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxict1jbqnr0t"]
+[gd_scene load_steps=7 format=3 uid="uid://dxict1jbqnr0t"]
 
-[ext_resource type="Script" uid="uid://dyxnkn31gcqfk" path="res://level_template_2.gd" id="1_tmyrd"]
-[ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="2_upeu0"]
-[ext_resource type="TileSet" uid="uid://bhpgem6m0hswm" path="res://Assets/rocktileset.tres" id="2_w5cw4"]
-[ext_resource type="PackedScene" uid="uid://npgtqaxmg766" path="res://Scenes/player.tscn" id="3_5skk6"]
+[ext_resource type="Script" uid="uid://dyxnkn31gcqfk" path="res://Scripts/level_template_2.gd" id="1_tmyrd"]
+[ext_resource type="TileSet" uid="uid://b31nyn0bsfpaj" path="res://Assets/tileset.tres" id="2_5skk6"]
 [ext_resource type="Texture2D" uid="uid://bea2obhmnlce4" path="res://Assets/LoadingScreen.png" id="6_5skk6"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tmyrd"]
@@ -14,7 +12,7 @@ cellular_distance_function = 2
 cellular_return_type = 0
 
 [sub_resource type="Gradient" id="Gradient_upeu0"]
-offsets = PackedFloat32Array(0.12, 0.97)
+offsets = PackedFloat32Array(0.279221, 0.97)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5skk6"]
@@ -26,28 +24,25 @@ metadata/_snap_enabled = true
 
 [node name="level_template2" type="Node"]
 script = ExtResource("1_tmyrd")
+max_x = 15
+max_y = 15
 noise = SubResource("FastNoiseLite_tmyrd")
 offset = SubResource("GradientTexture2D_5skk6")
+wall_terrain = 1
 noise_threshold = 0.3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8016.0
+offset_top = -5024.0
+offset_right = 7280.0
+offset_bottom = 4712.0
+color = Color(0, 0, 0, 1)
 
 [node name="tilemap" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
 position = Vector2(-8, -8)
-tile_set = ExtResource("2_w5cw4")
+tile_set = ExtResource("2_5skk6")
 metadata/_edit_lock_ = true
-
-[node name="StuffThatNeedsToBePathable" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="Chest2" parent="StuffThatNeedsToBePathable" instance=ExtResource("2_upeu0")]
-position = Vector2(32, 16)
-
-[node name="Chest" parent="StuffThatNeedsToBePathable" instance=ExtResource("2_upeu0")]
-position = Vector2(16, 16)
-
-[node name="Player" parent="StuffThatNeedsToBePathable" instance=ExtResource("3_5skk6")]
-unique_name_in_owner = true
-position = Vector2(16, 48)
 
 [node name="loadingscreen" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -55,3 +50,7 @@ visible = false
 offset_right = 320.0
 offset_bottom = 224.0
 texture = ExtResource("6_5skk6")
+metadata/_edit_lock_ = true
+
+[node name="level_spawnables" type="Node" parent="."]
+unique_name_in_owner = true

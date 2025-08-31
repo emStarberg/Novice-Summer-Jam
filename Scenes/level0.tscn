@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://0edcxka3obsa"]
+
+[ext_resource type="PackedScene" uid="uid://dxict1jbqnr0t" path="res://Scenes/level_template_2.tscn" id="1_8hgej"]
+[ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="4_pca0e"]
+[ext_resource type="PackedScene" uid="uid://mmxmq3d5scim" path="res://Scenes/slime_enemy.tscn" id="5_y4o00"]
+
+[node name="level0" instance=ExtResource("1_8hgej")]
+max_x = 35
+max_y = 35
+
+[node name="ColorRect" parent="." index="0"]
+color = Color(0.27, 0.1269, 0.1269, 1)
+
+[node name="SlimeEnemy" parent="level_spawnables" index="0" instance=ExtResource("5_y4o00")]
+
+[node name="Chest" parent="level_spawnables" index="1" instance=ExtResource("4_pca0e")]
+
+[node name="Chest2" parent="level_spawnables" index="2" instance=ExtResource("4_pca0e")]
+itemNum = 2

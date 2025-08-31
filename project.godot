@@ -11,7 +11,9 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="uid://cy0fmalqwvv35"
+
+run/main_scene="uid://dlpge75oygaeo"
+
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -25,6 +27,16 @@ gdscript/warnings/unsafe_property_access=2
 gdscript/warnings/unsafe_method_access=2
 gdscript/warnings/unsafe_call_argument=2
 gdscript/warnings/unsafe_void_return=2
+gdscript/defaults/default_clear_color=Color(0.3, 0.3, 0.3, 1)
+gdscript/size/viewport_height=512
+gdscript/size/viewport_width=512
+
+[display]
+
+window/size/viewport_width=256
+window/size/viewport_height=224
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [display]
 

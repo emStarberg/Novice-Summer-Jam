@@ -3,7 +3,7 @@ extends CharacterBody2D
 # --- Enemy parameters ---
 @export var speed: float = 64.0              # Pixels per second, same as player
 @export var move_distance: float = 16.0      # One tile per turn
-@export var screen_size: Vector2 = Vector2(1152, 648)
+var screen_size: Vector2 = Vector2(ProjectSettings.get("display/window/size/viewport_width") as float, ProjectSettings.get("display/window/size/viewport_height") as float)
 @export var max_hits: int = 3
 
 # --- Movement state ---
