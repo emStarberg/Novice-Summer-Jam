@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 // -----------------------------------------------------------------------------
 // Player.cs
 // Author: Emily Braithwaite
@@ -8,28 +11,47 @@ using System;
 public partial class Player : CharacterBody2D
 {
 
-	[Export] public TurnManager TurnManagerNode; // Calls NextTurn() on this whenever the player chooses an action
-	[Export] public TextureProgressBar Healthbar;
+	private TurnManager TurnManagerNode; // Calls NextTurn() on this whenever the player chooses an action
+	private HealthBar Healthbar;
 	private string facing = "left"; // Direction player is facing
 	private AnimatedSprite2D currentAnim, idleAnim, moveAnim, attackAnim, hurtAnim; // Animations
 	private Vector2? moveTarget = null; // For movement between tiles
 	private float moveSpeed = 64f; // Pixels per second
-	private float health = 100; // Player's health level
+	private float health = 100f; // Player's health level
 	private Label healthLabel;
-
+	private Node2D animFolder, raycastFolder;
+	private RayCast2D castLeft, castRight, castUp, castDown;
+	private AudioStreamPlayer2D Audio;
+	private AudioStreamPlayer2D swordAudio;
+	private AudioStreamPlayer2D playerHitAudio;
+	private bool HoldingSword = false;
+	private bool WearingSweater = false;
 
 	public override void _Ready()
 	{
 		// Set up animations
-		idleAnim = GetNode<AnimatedSprite2D>("Idle");
-		moveAnim = GetNode<AnimatedSprite2D>("Move");
-		attackAnim = GetNode<AnimatedSprite2D>("Attack");
-		hurtAnim = GetNode<AnimatedSprite2D>("Hurt");
+		TurnManagerNode = (TurnManager)GetParent().GetNode<Node2D>("Turn Manager");
+		Healthbar = (HealthBar)GetParent().GetNode<AnimatedSprite2D>("CanvasLayer/Gameplay UI/Health Bar");
+		animFolder = GetNode<Node2D>("Animations");
+		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Idle");
+		moveAnim = animFolder.GetNode<AnimatedSprite2D>("Move");
+		attackAnim = animFolder.GetNode<AnimatedSprite2D>("Attack");
+		hurtAnim = animFolder.GetNode<AnimatedSprite2D>("Hurt");
 		currentAnim = idleAnim;
 		// Connect moveAnim finished signal
 		moveAnim.AnimationFinished += OnMoveAnimFinished;
 
+		// Set up raycasts
+		raycastFolder = GetNode<Node2D>("Raycasts");
+		castLeft = raycastFolder.GetNode<RayCast2D>("CastLeft");
+		castRight = raycastFolder.GetNode<RayCast2D>("CastRight");
+		castUp = raycastFolder.GetNode<RayCast2D>("CastUp");
+		castDown = raycastFolder.GetNode<RayCast2D>("CastDown");
+
 		healthLabel = Healthbar.GetNode<Label>("Health Label");
+		Audio = GetNode<AudioStreamPlayer2D>("Audio");
+		swordAudio = GetNode<AudioStreamPlayer2D>("swordAudio");
+		playerHitAudio = GetNode<AudioStreamPlayer2D>("playerHitAudio");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -37,16 +59,37 @@ public partial class Player : CharacterBody2D
 		HandleMovement(delta);
 		SetFacingAnim();
 		// Update health bar
-		Healthbar.Value = health;
+		Healthbar.SetHealth(health);
 		healthLabel.Text = health + "%";
 
-		if (Input.IsActionJustPressed("ui_accept"))
+		if (Input.IsActionJustPressed("ui_accept") && HoldingSword)
 		{
 			Attack();
+			TurnManagerNode.NextTurn("attack");
 		}
+		// FOR TESTING PURPOSES
 		else if (Input.IsActionJustPressed("ui_text_indent"))
 		{
 			Hurt(20);
+		}
+		if (Input.IsActionJustPressed("input_interact"))
+		{
+			if (castRight.IsColliding() && castRight.GetCollider() is Chest chestRight)
+			{
+				chestRight.Open();
+			}
+			if (castLeft.IsColliding() && castLeft.GetCollider() is Chest chestLeft)
+			{
+				chestLeft.Open();
+			}
+			if (castUp.IsColliding() && castUp.GetCollider() is Chest chestUp)
+			{
+				chestUp.Open();
+			}
+			if (castDown.IsColliding() && castDown.GetCollider() is Chest chestDown)
+			{
+				chestDown.Open();
+			}
 		}
 	}
 
@@ -55,7 +98,19 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	private void SetFacingAnim()
 	{
-		currentAnim.Animation = facing;
+		if (WearingSweater)
+		{
+			currentAnim.Animation = "sweater_" + facing;
+		}
+		else if (HoldingSword)
+		{
+			currentAnim.Animation = "sword_" + facing;
+		}
+		else
+		{
+			currentAnim.Animation = facing;
+		}
+
 	}
 
 	/// <summary>
@@ -108,31 +163,47 @@ public partial class Player : CharacterBody2D
 		// Only allow new movement if not currently moving
 		if (Input.IsActionJustPressed("ui_right"))
 		{
-			moveTarget = Position + new Vector2(16, 0);
-			TurnManagerNode.NextTurn("right");
 			facing = "right";
-			SwitchAnim(moveAnim);
+			if (!castRight.IsColliding())
+			{
+				moveTarget = Position + new Vector2(16, 0);
+				TurnManagerNode.NextTurn("right");
+				SwitchAnim(moveAnim);
+				Audio.Play();
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_left"))
 		{
-			moveTarget = Position + new Vector2(-16, 0);
-			TurnManagerNode.NextTurn("left");
 			facing = "left";
-			SwitchAnim(moveAnim);
+			if (!castLeft.IsColliding())
+			{
+				moveTarget = Position + new Vector2(-16, 0);
+				TurnManagerNode.NextTurn("left");
+				SwitchAnim(moveAnim);
+				Audio.Play();
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_down"))
 		{
-			moveTarget = Position + new Vector2(0, 16);
-			TurnManagerNode.NextTurn("down");
 			facing = "down";
-			SwitchAnim(moveAnim);
+			if (!castDown.IsColliding())
+			{
+				moveTarget = Position + new Vector2(0, 16);
+				TurnManagerNode.NextTurn("down");
+				SwitchAnim(moveAnim);
+				Audio.Play();
+			}
 		}
 		else if (Input.IsActionJustPressed("ui_up"))
 		{
-			moveTarget = Position + new Vector2(0, -16);
-			TurnManagerNode.NextTurn("up");
 			facing = "up";
-			SwitchAnim(moveAnim);
+			if (!castUp.IsColliding())
+			{
+				moveTarget = Position + new Vector2(0, -16);
+				TurnManagerNode.NextTurn("up");
+				SwitchAnim(moveAnim);
+				Audio.Play();
+			}
 		}
 	}
 
@@ -144,6 +215,7 @@ public partial class Player : CharacterBody2D
 	{
 		health -= amount;
 		SwitchAnim(hurtAnim);
+		playerHitAudio.Play(); 
 	}
 
 	/// <summary>
@@ -152,6 +224,7 @@ public partial class Player : CharacterBody2D
 	private void Attack()
 	{
 		SwitchAnim(attackAnim);
+		swordAudio.Play();
 	}
 
 	/// <summary>
@@ -168,5 +241,20 @@ public partial class Player : CharacterBody2D
 	public void OnHurtAnimFinished()
 	{
 		SwitchAnim(idleAnim);
+	}
+
+	public void GiveSword()
+	{
+		HoldingSword = true;
+	}
+
+	public void GiveSweater()
+	{
+		WearingSweater = true;
+	}
+
+	public void Heal(float amount)
+	{
+		health += amount;
 	}
 }
