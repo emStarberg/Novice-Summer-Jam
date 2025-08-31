@@ -29,6 +29,12 @@ var is_attacking: bool = false
 # --- Hit tracking ---
 var current_hits: int = 0
 
+# --- Collisions ---
+@onready var cast_left: RayCast2D = $Raycasts/Left
+@onready var cast_right: RayCast2D = $Raycasts/Right
+@onready var cast_up: RayCast2D = $Raycasts/Up
+@onready var cast_down: RayCast2D = $Raycasts/Down
+
 # --- Sprites ---
 @onready var idle_sprite: AnimatedSprite2D = $Animations/Idle
 @onready var movement_sprite: AnimatedSprite2D = $Animations/Movement
@@ -87,16 +93,42 @@ func TakeTurn() -> void:
 		return
 
 	# Determine movement direction
+	var directions: Array[Vector2] = []
+	if not cast_left.is_colliding():
+		directions.append(Vector2(-1, 0))
+	if not cast_right.is_colliding():
+		directions.append(Vector2(1, 0))
+	if not cast_up.is_colliding():
+		directions.append(Vector2(0, -1))
+	if not cast_down.is_colliding():
+		directions.append(Vector2(0, 1))
+
 	if player_chase and player:
-		direction = (player.global_position - global_position).normalized()
+		var chase_dir: Vector2 = (player.global_position - global_position).normalized()
+		# Only chase if the direction is not blocked
+		if chase_dir.x < 0 and not cast_left.is_colliding():
+			direction = Vector2(-1, 0)
+		elif chase_dir.x > 0 and not cast_right.is_colliding():
+			direction = Vector2(1, 0)
+		elif chase_dir.y < 0 and not cast_up.is_colliding():
+			direction = Vector2(0, -1)
+		elif chase_dir.y > 0 and not cast_down.is_colliding():
+			direction = Vector2(0, 1)
+		else:
+			if directions.size() > 0:
+				direction = directions[randi() % directions.size()]
+			else:
+				direction = Vector2.ZERO
 	else:
-		var directions: Array[Vector2] = [Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]
-		direction = directions[randi() % directions.size()]
+		if directions.size() > 0:
+			direction = directions[randi() % directions.size()]
+		else:
+			direction = Vector2.ZERO
 
 	move_target = global_position + direction * move_distance
 	move_target.x = clamp(move_target.x, 0, screen_size.x)
 	move_target.y = clamp(move_target.y, 0, screen_size.y)
-	is_moving = true
+	is_moving = direction != Vector2.ZERO
 
 # --- Attack player ---
 func _on_attack_area_body_entered(body: Node) -> void:
