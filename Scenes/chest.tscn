@@ -75,7 +75,6 @@ animations = [{
 }]
 
 [node name="Chest" type="StaticBody2D"]
-scale = Vector2(0.806684, 0.806684)
 script = ExtResource("1_8uwsg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
