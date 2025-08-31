@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://j47g70y1klup"]
+[gd_scene load_steps=6 format=3 uid="uid://j47g70y1klup"]
 
 [ext_resource type="Script" uid="uid://lfcpuw0jc66p" path="res://Scripts/bat_enemy.gd" id="1_nvv5w"]
 [ext_resource type="Texture2D" uid="uid://e56k82lh5eqn" path="res://icon.svg" id="1_q8xid"]
+[ext_resource type="AudioStream" uid="uid://bgn6dq0tbrna0" path="res://audio/Whoosh2.wav" id="3_5m8x6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5m8x6"]
 
@@ -27,6 +28,9 @@ scale = Vector2(6.375, 6.375)
 shape = SubResource("RectangleShape2D_nvv5w")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5m8x6")
 
 [connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
 [connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]

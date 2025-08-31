@@ -20,6 +20,9 @@ public partial class Player : CharacterBody2D
 	private Label healthLabel;
 	private Node2D animFolder, raycastFolder;
 	private RayCast2D castLeft, castRight, castUp, castDown;
+	private AudioStreamPlayer2D Audio;
+	private AudioStreamPlayer2D swordAudio;
+	private AudioStreamPlayer2D playerHitAudio;
 
 
 	public override void _Ready()
@@ -42,6 +45,9 @@ public partial class Player : CharacterBody2D
 		castDown = raycastFolder.GetNode<RayCast2D>("CastDown");
 		
 		healthLabel = Healthbar.GetNode<Label>("Health Label");
+		Audio = GetNode<AudioStreamPlayer2D>("Audio");
+		swordAudio = GetNode<AudioStreamPlayer2D>("swordAudio");
+		playerHitAudio = GetNode<AudioStreamPlayer2D>("playerHitAudio");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -147,6 +153,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(16, 0);
 				TurnManagerNode.NextTurn("right");
 				SwitchAnim(moveAnim);
+				Audio.Play();
 			}
 		}
 		else if (Input.IsActionJustPressed("ui_left"))
@@ -157,6 +164,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(-16, 0);
 				TurnManagerNode.NextTurn("left");
 				SwitchAnim(moveAnim);
+				Audio.Play();
 			}
 		}
 		else if (Input.IsActionJustPressed("ui_down"))
@@ -167,6 +175,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(0, 16);
 				TurnManagerNode.NextTurn("down");
 				SwitchAnim(moveAnim);
+				Audio.Play();
 			}
 		}
 		else if (Input.IsActionJustPressed("ui_up"))
@@ -177,6 +186,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(0, -16);
 				TurnManagerNode.NextTurn("up");
 				SwitchAnim(moveAnim);
+				Audio.Play();
 			}
 		}
 	}
@@ -189,6 +199,7 @@ public partial class Player : CharacterBody2D
 	{
 		health -= amount;
 		SwitchAnim(hurtAnim);
+		playerHitAudio.Play(); 
 	}
 
 	/// <summary>
@@ -197,6 +208,7 @@ public partial class Player : CharacterBody2D
 	private void Attack()
 	{
 		SwitchAnim(attackAnim);
+		swordAudio.Play();
 	}
 
 	/// <summary>

@@ -12,6 +12,7 @@ var player: CharacterBody2D = null
 @onready var direction_timer: Timer = Timer.new()
 @onready var move_timer: Timer = Timer.new()
 @onready var detection_area: Area2D = $DetectionArea
+@onready var batAudio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready() -> void:
 	randomize()
@@ -45,6 +46,7 @@ func _on_move() -> void:
 		direction = (player.global_position - global_position).normalized()
 	
 	new_pos += direction * speed * move_interval
+	batAudio.play()
 
 	if not player_chase:
 		if new_pos.x < 0:
