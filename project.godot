@@ -30,6 +30,10 @@ gdscript/warnings/unsafe_void_return=2
 
 project/assembly_name="New Game Project"
 
+[global_group]
+
+player=""
+
 [input]
 
 input_interact={
