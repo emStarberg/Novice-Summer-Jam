@@ -7,14 +7,14 @@ using System;
 // -----------------------------------------------------------------------------
 public interface Item
 {
-    string ItemName { get; }
-    string Description { get; set; }
-    string ImagePath { get; }
-    bool IsCarryable { get;}
+	string ItemName { get; }
+	string Description { get; set; }
+	string ImagePath { get; }
+	bool IsCarryable { get;}
 
-    // To be called when acquired by player
-    public void OnAcquired() { }
+	// To be called when acquired by player
+	public void OnAcquired() { }
 
-    
+	
    
 }

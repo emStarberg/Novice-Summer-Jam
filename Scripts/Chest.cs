@@ -10,7 +10,10 @@ public partial class Chest() : StaticBody2D
 	private Inventory playerInventory;
 	private CanvasLayer uiLayer;
 	private TurnManager turnManager;
-	private Item item = new Carrot();
+
+	// FOR TESTING PURPOSES
+	private Item item = new Sword();
+
 	private AnimatedSprite2D openAnim;
 	private Node currentOverlay;
 
@@ -85,7 +88,10 @@ public partial class Chest() : StaticBody2D
 			openAnim.Visible = false;
 		}
 	}
-
+	
+	/// <summary>
+	/// Sets the item inside the chest. Should be called on instantiate
+	/// </summary>
 	public void SetItem(Item setItem)
 	{
 		this.item = setItem;
