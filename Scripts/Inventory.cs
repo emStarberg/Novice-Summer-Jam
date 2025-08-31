@@ -9,8 +9,21 @@ using System.Collections.Generic;
 // -----------------------------------------------------------------------------
 public partial class Inventory : Node2D
 {
-	[Export] public TextureRect[] tiles; // Tiles in UI Inventory
+	private List<TextureRect> tiles = []; // Tiles in UI Inventory
 	private List<Item> items = []; // Items in inventory
+	private Player player;
+
+
+	public override void _Ready()
+	{
+		player = (Player)GetParent();
+
+		Control controlNode = GetParent().GetParent().GetNode<Control>("CanvasLayer/Inventory");
+		foreach (TextureRect n in controlNode.GetChildren())
+		{
+			tiles.Add(n);
+		}
+	}
 
 	public void AddItem(Item item)
 	{
@@ -25,7 +38,16 @@ public partial class Inventory : Node2D
 		Label tooltip = new Label();
 		tooltip.Text = item.Description;
 		tooltip.Visible = false;
-		
+
+		if (item.ItemName == "Sword")
+		{
+			player.GiveSword();
+		}
+
+		if (item.ItemName == "Sweater")
+		{
+			player.GiveSweater();
+		}
 	}
 
 	public void RemoveItem(Item item)
@@ -38,5 +60,8 @@ public partial class Inventory : Node2D
 		return this.items;
 	}
 
-
+	public Player GetPlayer()
+	{
+		return player;
+	}
 }

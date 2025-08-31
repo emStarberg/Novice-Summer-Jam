@@ -12,7 +12,7 @@ public partial class Chest() : StaticBody2D
 	private TurnManager turnManager;
 
 	// FOR TESTING PURPOSES
-	private Item item = new Sword();
+	private Item item = new Sweater();
 
 	private AnimatedSprite2D openAnim;
 	private Node currentOverlay;
@@ -119,6 +119,15 @@ public partial class Chest() : StaticBody2D
 		{
 			playerInventory.AddItem(item);
 		}
+		else
+		{
+			if (item.ItemName == "Carrot")
+			{
+				playerInventory.GetPlayer().Heal(20f);
+			}
+		}
+
+
 		GD.Print("Inventory:");
 		foreach (Item i in playerInventory.GetItems())
 		{

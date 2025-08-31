@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://06vv4vyf8xsn"]
+[gd_scene load_steps=6 format=4 uid="uid://c8qdk8tf1883l"]
 
-[ext_resource type="Script" uid="uid://dr4j0dcseu5yl" path="res://Scripts/levelgen.gd" id="1_w8fqg"]
+[ext_resource type="Script" path="res://Scripts/levelgen.gd" id="1_w8fqg"]
 [ext_resource type="Texture2D" uid="uid://c88vkytmb5x4r" path="res://Assets/Pasted image.png" id="2_ly5kn"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_t7h1v"]
