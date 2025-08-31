@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=157 format=3 uid="uid://npgtqaxmg766"]
+
 
 [ext_resource type="Script" uid="uid://kvin8xcxii1f" path="res://Scripts/Player.cs" id="1_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://doq8g3ib80ncb" path="res://Assets/RabbitIdle.png" id="2_tx1dd"]
@@ -1258,7 +1260,6 @@ animations = [{
 "name": &"up",
 "speed": 5.0
 }]
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igrcy"]
 blend_mode = 3
 

@@ -1,0 +1,375 @@
+[gd_scene load_steps=10 format=3 uid="uid://bod756ua8u13w"]
+
+[ext_resource type="Script" uid="uid://daf4p8qfqs3b0" path="res://Scripts/CutscenePlayer.cs" id="1_j6j7k"]
+[ext_resource type="Texture2D" uid="uid://r51t48j20npx" path="res://Assets/CutsceneBackground.png" id="1_u4yv4"]
+[ext_resource type="Texture2D" uid="uid://cg4s0fqsdsqwu" path="res://Assets/RabbitRun.png" id="2_p30sb"]
+[ext_resource type="Texture2D" uid="uid://b874ru8mdjf3u" path="res://Assets/rabbitYap.png" id="3_53jq0"]
+[ext_resource type="Texture2D" uid="uid://cl7nhg8i1ubb0" path="res://Assets/rabbitYapD.png" id="4_3q24f"]
+[ext_resource type="Texture2D" uid="uid://c3owxcanp7ewi" path="res://Assets/rabbitShock-sheet.png" id="5_8ye5a"]
+
+[sub_resource type="Animation" id="Animation_qcoa3"]
+resource_name = "Opening"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Characters/Rabbit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3.33, 4.79, 6.62, 6.62369, 8.13333, 10.0411, 10.3667, 11.0253, 12.0212, 13.1577, 14.47, 15.7471, 19.0043, 20.3752, 26.9902, 28.409),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-170, 65), Vector2(-103, 64), Vector2(-103, 64), Vector2(-73, 64), Vector2(-72, 65), Vector2(-73, 64), Vector2(-27, 66), Vector2(-27, 66), Vector2(-31, 60), Vector2(-24, 64), Vector2(-24, 64), Vector2(15, 65), Vector2(15, 65), Vector2(57, 64), Vector2(57, 64), Vector2(95, 71), Vector2(95, 71), Vector2(111, 62)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Panel/VBoxContainer/RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 27)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Panel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Characters/Rabbit:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.466667, 0.766667, 1.03333, 3.33935, 3.53935, 3.80602, 4.10602, 4.37268, 6.62, 6.82, 7.08667, 7.38667, 7.65333, 10.0177, 10.3458, 10.7333, 12.0333, 12.1667, 12.4, 12.6667, 12.9, 14.47, 14.6033, 14.8367, 15.1033, 15.3367, 19.0043, 19.1376, 19.371, 19.6376, 19.871, 26.9902, 27.0333, 27.2333, 27.5, 27.8, 28.0667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 3, 4, 0, 0, 2, 3, 4, 0, 0, 2, 3, 4, 0, 0, 2, 0, 0, 2, 3, 4, 0, 0, 2, 3, 4, 0, 0, 2, 3, 4, 0, 0, 0, 2, 3, 4, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Panel/VBoxContainer/RichTextLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.33935, 6.55938, 10.5, 12.0681, 14.4817, 19.0043, 22.6711, 25.7888),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["It's been so long since I've visited the burrow..", "I wonder how everyone's been?", "I can't wait to see what's new!", "H-Huh??", "The entrance...", "it's so big now.. Something seems off.", "I wonder if anyone is still here...", "Well, there's no time to waste!", "I don't know what lies ahead but I have to find out!"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Characters/RabbitYap:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 9.97082),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Characters/RabbitYap:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.133333, 0.333333, 0.5, 0.666667, 0.7, 0.8, 1, 1.16667, 1.33333, 1.36667, 1.46667, 1.66667, 1.83333, 2.02697, 2.0603, 2.1603, 2.3603, 3.33923, 3.37256, 3.47256, 3.67256, 3.83923, 4.06667, 4.1, 4.2, 4.4, 4.56667, 4.76667, 4.8, 4.9, 5.1, 6.56129, 6.59463, 6.69463, 6.89463, 7.06129, 7.22914, 7.26247, 7.36247, 7.56247, 7.72914, 7.94385, 7.97718, 8.07718, 8.27718),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Characters/RabbitShock:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 9.98254, 19.03),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Characters/RabbitShock:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(9.76667, 12.0831, 12.2588, 12.4667, 12.6333, 12.8329, 13.0087, 13.2165, 14.7193, 14.895, 15.1029, 15.2696, 15.4692, 15.6449, 15.8528, 16.0194, 16.2649, 16.4406, 16.6485, 16.8151, 16.9913, 17.167, 17.3749),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Characters/RabbitYapD:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 17.9521),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Characters/RabbitYapD:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(17.9521, 19.0651, 19.2292, 19.4, 19.6, 19.8619, 20.0259, 20.1967, 20.3967, 20.6006, 20.7646, 20.9354, 22.8144, 22.9785, 23.1493, 23.3493, 23.6234, 23.7875, 23.9583, 24.1583, 24.3967, 24.5608, 24.7316, 25.9082, 26.0722, 26.243, 26.443, 26.6463, 26.8103, 26.9812),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Characters/Rabbit:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(25.8, 28.5613),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_pvbl2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Characters/Rabbit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-170, 65)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Panel/VBoxContainer/RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 27)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Panel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Characters/Rabbit:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Panel/VBoxContainer/RichTextLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["It's been so long since I've visited the burrow.."]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Characters/RabbitYap:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Characters/RabbitYap:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Characters/RabbitShock:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Characters/RabbitShock:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Characters/RabbitYapD:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Characters/RabbitYapD:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Characters/Rabbit:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vi1t0"]
+_data = {
+&"Opening": SubResource("Animation_qcoa3"),
+&"RESET": SubResource("Animation_pvbl2")
+}
+
+[node name="Cutscene" type="Node2D"]
+position = Vector2(0, -1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+offset_left = -136.0
+offset_top = -98.0
+offset_right = 146.0
+offset_bottom = -22.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 282.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="UI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+text = "Rabbit:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(20, 50)
+layout_mode = 2
+text = "It's been so long since I've visited the burrow.."
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vi1t0")
+}
+script = ExtResource("1_j6j7k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u4yv4")
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="Rabbit" type="Sprite2D" parent="Characters"]
+position = Vector2(-170, 65)
+scale = Vector2(1.6875, 1.6875)
+texture = ExtResource("2_p30sb")
+hframes = 5
+vframes = 4
+
+[node name="RabbitYap" type="Sprite2D" parent="Characters"]
+position = Vector2(-124, 5)
+scale = Vector2(1.84375, 1.84375)
+texture = ExtResource("3_53jq0")
+hframes = 2
+
+[node name="RabbitYapD" type="Sprite2D" parent="Characters"]
+position = Vector2(-124, 5)
+scale = Vector2(1.79297, 1.79297)
+texture = ExtResource("4_3q24f")
+hframes = 2
+
+[node name="RabbitShock" type="Sprite2D" parent="Characters"]
+position = Vector2(-124, 5)
+scale = Vector2(1.8125, 1.8125)
+texture = ExtResource("5_8ye5a")
+hframes = 2
+
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="OnAnimationFinished"]

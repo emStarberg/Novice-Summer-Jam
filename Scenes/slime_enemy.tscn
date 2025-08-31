@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=101 format=3 uid="uid://mmxmq3d5scim"]
+
 
 [ext_resource type="Texture2D" uid="uid://hugj6y0gucja" path="res://Assets/SlimeIdle.png" id="1_3pdw6"]
 [ext_resource type="Script" uid="uid://ty8so3gy35yn" path="res://Scripts/slime_enemy.gd" id="1_osevl"]
@@ -7,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cw84meml37yf3" path="res://Assets/SlimeHorizontalAttack.png" id="4_5gpua"]
 [ext_resource type="Texture2D" uid="uid://dy43tqqlwhlpi" path="res://Assets/slimeTakeDamage.png" id="5_nx18x"]
 [ext_resource type="Texture2D" uid="uid://do0k6om8vurjl" path="res://Assets/SlimeDeath.png" id="6_webrq"]
-[ext_resource type="Script" uid="uid://b0utg518mpch7" path="res://Scripts/TurnManagerEnemyVersion.cs" id="8_rcgqq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvcmr"]
 atlas = ExtResource("1_3pdw6")
@@ -759,10 +760,6 @@ shape = SubResource("CircleShape2D_5m8x6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.775, 0.775)
 shape = SubResource("RectangleShape2D_nvv5w")
-
-[node name="Turn Manager" type="Node2D" parent="." node_paths=PackedStringArray("EnemyContainer")]
-script = ExtResource("8_rcgqq")
-EnemyContainer = NodePath("..")
 
 [node name="AttackArea" type="Area2D" parent="."]
 
