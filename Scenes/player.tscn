@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=3 uid="uid://npgtqaxmg766"]
+[gd_scene load_steps=154 format=3 uid="uid://npgtqaxmg766"]
 
 [ext_resource type="Script" uid="uid://kvin8xcxii1f" path="res://Scripts/Player.cs" id="1_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://doq8g3ib80ncb" path="res://Assets/RabbitIdle.png" id="2_tx1dd"]
@@ -1258,9 +1258,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igrcy"]
-blend_mode = 3
-
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_f1ek2")
 
@@ -1322,16 +1319,6 @@ stream = ExtResource("15_qqcod")
 
 [node name="Sword" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("16_igrcy")
-
-[node name="Fog" type="Sprite2D" parent="."]
-visible = false
-top_level = true
-material = SubResource("CanvasItemMaterial_igrcy")
-centered = false
-script = ExtResource("17_qqcod")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
 
 [connection signal="animation_finished" from="Animations/Move" to="." method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Animations/Attack" to="." method="OnAttackAnimFinished"]
