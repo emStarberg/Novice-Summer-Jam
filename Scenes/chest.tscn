@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsbgun0yywos1"]
+[gd_scene load_steps=11 format=3 uid="uid://dlpcegltfkatd"]
 
 [ext_resource type="Script" uid="uid://mr57ws5k4vlb" path="res://Scripts/Chest.cs" id="1_8uwsg"]
 [ext_resource type="Texture2D" uid="uid://cm8dp0arja355" path="res://Assets/treasureChest.png" id="2_bp1or"]
@@ -79,19 +79,14 @@ animations = [{
 script = ExtResource("1_8uwsg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-2.02656e-06, 3.51667e-06)
-scale = Vector2(1.23964, 1.23964)
 texture = ExtResource("2_bp1or")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_ou3lj")
 
 [node name="Open" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.17421e-05, 5.78165e-06)
-scale = Vector2(1.23964, 1.23964)
 sprite_frames = SubResource("SpriteFrames_lykbi")
 animation = &"open"
 

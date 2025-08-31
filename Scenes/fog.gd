@@ -3,6 +3,8 @@ extends Sprite2D
 const LightTexture = preload("res://Assets/Light.png")
 const GRID_SIZE = 16
 
+@onready var player: Node2D = %Player
+
 var display_width:int = ProjectSettings.get("display/window/size/viewport_width")
 var display_height:int = ProjectSettings.get("display/window/size/viewport_height")
 
@@ -31,4 +33,4 @@ func update_fog_image_texture() -> void:
 	texture = fogTexture
 
 func _input(event:InputEvent) -> void:
-	update_fog((get_parent() as Node2D).position/GRID_SIZE)
+	update_fog((player as Node2D).position/GRID_SIZE)
