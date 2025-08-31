@@ -2,6 +2,8 @@ extends Node
 
 class_name Level
 
+signal levelchange
+
 var loadin:=true
 
 @onready var loading_screen: TextureRect = %loadingscreen
@@ -26,7 +28,8 @@ const floor_terrain := 0
 func _ready() -> void:
 	offset.width = max_x
 	offset.height = max_y
-	generate()
+	while good_tiles.size() < 2:
+		generate()
 	loading_screen.visible = false
 	loadin = false
 
@@ -39,7 +42,7 @@ func index(x: int, y: int) -> float:
 
 func get_good_coord() -> Vector2i:
 	var tile : Variant = good_tiles.pick_random()
-	good_tiles.erase(tile)
+	#good_tiles.erase(tile)
 	return tile * tile_size
 
 func generate() -> void:
@@ -60,7 +63,7 @@ func generate() -> void:
 			else: # Can break paths
 				tilemap.set_cells_terrain_connect([Vector2i(x, y)], 0, wall_terrain)
 	
-	tilemap.set_cells_terrain_connect([Vector2i(max_x / 2, max_y / 2)], 0, floor_terrain)
+	tilemap.set_cells_terrain_connect(neighboring(Vector2i(max_x / 2, max_y / 2)), 0, floor_terrain)
 	
 	good_tiles = find_connected(Vector2i(max_x / 2, max_y / 2))
 	
@@ -88,3 +91,8 @@ func find_connected(start: Vector2i) -> Array:
 		search.remove_at(0)
 	
 	return result
+
+
+func _on_stiars_area_entered(area: Area2D) -> void:
+	Signalbus.emit_signal("transition")
+	print("e")

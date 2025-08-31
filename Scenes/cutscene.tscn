@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bod756ua8u13w"]
+[gd_scene load_steps=10 format=3 uid="uid://qd5fx5kj5qan"]
 
 [ext_resource type="Script" uid="uid://daf4p8qfqs3b0" path="res://Scripts/CutscenePlayer.cs" id="1_j6j7k"]
 [ext_resource type="Texture2D" uid="uid://r51t48j20npx" path="res://Assets/CutsceneBackground.png" id="1_u4yv4"]

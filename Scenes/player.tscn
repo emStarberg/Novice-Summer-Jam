@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=157 format=3 uid="uid://npgtqaxmg766"]
-
+[gd_scene load_steps=158 format=3 uid="uid://npgtqaxmg766"]
 
 [ext_resource type="Script" uid="uid://kvin8xcxii1f" path="res://Scripts/Player.cs" id="1_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://doq8g3ib80ncb" path="res://Assets/RabbitIdle.png" id="2_tx1dd"]
@@ -1260,10 +1258,14 @@ animations = [{
 "name": &"up",
 "speed": 5.0
 }]
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igrcy"]
 blend_mode = 3
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_igrcy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igrcy"]
+size = Vector2(4, 4)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_f1ek2")
@@ -1337,6 +1339,11 @@ centered = false
 script = ExtResource("17_qqcod")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_igrcy")
 
 [connection signal="animation_finished" from="Animations/Move" to="." method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Animations/Attack" to="." method="OnAttackAnimFinished"]

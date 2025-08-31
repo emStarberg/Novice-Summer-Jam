@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxict1jbqnr0t"]
+[gd_scene load_steps=8 format=3 uid="uid://dxict1jbqnr0t"]
 
 [ext_resource type="Script" uid="uid://dyxnkn31gcqfk" path="res://Scripts/level_template_2.gd" id="1_tmyrd"]
 [ext_resource type="TileSet" uid="uid://b31nyn0bsfpaj" path="res://Assets/tileset.tres" id="2_5skk6"]
+[ext_resource type="PackedScene" uid="uid://d12l085kscwp1" path="res://Scenes/stiars.tscn" id="4_osigx"]
 [ext_resource type="Texture2D" uid="uid://bea2obhmnlce4" path="res://Assets/LoadingScreen.png" id="6_5skk6"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tmyrd"]
@@ -46,7 +47,6 @@ metadata/_edit_lock_ = true
 
 [node name="loadingscreen" type="TextureRect" parent="."]
 unique_name_in_owner = true
-visible = false
 offset_right = 320.0
 offset_bottom = 224.0
 texture = ExtResource("6_5skk6")
@@ -54,3 +54,7 @@ metadata/_edit_lock_ = true
 
 [node name="level_spawnables" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="stiars" parent="level_spawnables" instance=ExtResource("4_osigx")]
+
+[connection signal="area_entered" from="level_spawnables/stiars" to="." method="_on_stiars_area_entered"]

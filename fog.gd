@@ -5,8 +5,6 @@ const GRID_SIZE = 16
 
 var display_width:int = 1000
 var display_height:int = 1000
-@onready var player: Node2D = %Player
-
 
 var fogImage:Image = Image.new()
 var fogTexture:ImageTexture = ImageTexture.new()
@@ -33,4 +31,4 @@ func update_fog_image_texture() -> void:
 	texture = fogTexture
 
 func _input(event:InputEvent) -> void:
-	update_fog((player as Node2D).position/GRID_SIZE)
+	update_fog((get_parent() as Node2D).position/GRID_SIZE)

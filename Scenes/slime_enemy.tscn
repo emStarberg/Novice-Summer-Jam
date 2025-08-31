@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=101 format=3 uid="uid://mmxmq3d5scim"]
-
+[gd_scene load_steps=100 format=3 uid="uid://mmxmq3d5scim"]
 
 [ext_resource type="Texture2D" uid="uid://hugj6y0gucja" path="res://Assets/SlimeIdle.png" id="1_3pdw6"]
 [ext_resource type="Script" uid="uid://ty8so3gy35yn" path="res://Scripts/slime_enemy.gd" id="1_osevl"]

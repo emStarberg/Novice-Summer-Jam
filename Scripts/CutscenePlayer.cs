@@ -11,6 +11,7 @@ public partial class CutscenePlayer : AnimationPlayer
 	public void OnAnimationFinished()
 	{
 		// Alex please change this file path
-		GetTree().ChangeSceneToFile("res://Scenes/player_with_tilemap.tscn");
+		// GetTree().ChangeSceneToFile("res://Scenes/player_with_tilemap.tscn");
+		//EmitSignal(signalbus.SignalName.cutscenedone);
 	}
 }
