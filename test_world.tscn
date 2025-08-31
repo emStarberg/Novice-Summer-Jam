@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://gy2xi13opkh2"]
+
+[ext_resource type="Script" uid="uid://kb8ogwxu3cj" path="res://test_world.gd" id="1_dxppu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gy3sr"]
+blend_mode = 3
+
+[node name="testWorld" type="Node2D"]
+script = ExtResource("1_dxppu")
+
+[node name="Fog" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_gy3sr")
+centered = false
