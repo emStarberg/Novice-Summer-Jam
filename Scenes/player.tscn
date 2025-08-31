@@ -1027,6 +1027,118 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_16s1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4aeom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cflga")
+}],
+"loop": false,
+"name": &"sweater_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r48c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cb0tl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07wkv")
+}],
+"loop": false,
+"name": &"sweater_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6qf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wyuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m36db")
+}],
+"loop": false,
+"name": &"sweater_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go4hf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dx46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdvjh")
+}],
+"loop": false,
+"name": &"sweater_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16s1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4aeom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cflga")
+}],
+"loop": false,
+"name": &"sword_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r48c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cb0tl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07wkv")
+}],
+"loop": false,
+"name": &"sword_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6qf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wyuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m36db")
+}],
+"loop": false,
+"name": &"sword_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go4hf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dx46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdvjh")
+}],
+"loop": false,
+"name": &"sword_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_go4hf")
 }, {
 "duration": 1.0,
@@ -1179,7 +1291,7 @@ animation = &"sword_right"
 [node name="Hurt" type="AnimatedSprite2D" parent="Animations"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_astm7")
-animation = &"down"
+animation = &"sword_up"
 
 [node name="Die" type="AnimatedSprite2D" parent="Animations"]
 visible = false

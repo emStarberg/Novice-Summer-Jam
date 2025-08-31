@@ -5,9 +5,11 @@ using System;
 // Author: Emily Braithwaite
 // Purpose: Manages turn logic for the game.
 // -----------------------------------------------------------------------------
-public partial class TurnManager : Node2D
+public partial class TurnManager : Node
 {
 	[Export] public CharacterBody2D Player;
+	[Signal]
+	public delegate void EnemyTurnEventHandler();
 	private int turnCount = 0;
 
 	/// <summary>
@@ -25,6 +27,8 @@ public partial class TurnManager : Node2D
 	/// <param name="playerAction">Action from player that has called this</param>
 	public void NextTurn(String playerAction)
 	{
+		// Signal enemies
+		EmitSignal("EnemyTurn");
 		// Increase turn count
 		turnCount++;
 		GD.Print("Moved to turn: " + turnCount + " Input: " + playerAction);

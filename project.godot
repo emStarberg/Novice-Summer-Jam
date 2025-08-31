@@ -36,9 +36,18 @@ window/size/viewport_height=224
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [dotnet]
 
 project/assembly_name="New Game Project"
+
+[global_group]
+
+player=""
 
 [input]
 

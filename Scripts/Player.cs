@@ -1,8 +1,5 @@
 using Godot;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 // -----------------------------------------------------------------------------
 // Player.cs
 // Author: Emily Braithwaite
@@ -30,7 +27,7 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		// Set up animations
-		TurnManagerNode = (TurnManager)GetParent().GetNode<Node2D>("Turn Manager");
+		TurnManagerNode = (TurnManager)GetParent().GetNode<Node>("Turn Manager");
 		Healthbar = (HealthBar)GetParent().GetNode<AnimatedSprite2D>("CanvasLayer/Gameplay UI/Health Bar");
 		animFolder = GetNode<Node2D>("Animations");
 		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Idle");
@@ -70,6 +67,22 @@ public partial class Player : CharacterBody2D
 
 		if (Input.IsActionJustPressed("ui_accept") && HoldingSword)
 		{
+			if (castRight.IsColliding() && castRight.GetCollider() is Godot.CharacterBody2D rightBody && rightBody.HasMethod("TakeHit"))
+			{
+				rightBody.Call("TakeHit");
+			}
+			if (castLeft.IsColliding() && castLeft.GetCollider() is Godot.CharacterBody2D leftBody && leftBody.HasMethod("TakeHit"))
+			{
+				leftBody.Call("TakeHit");
+			}
+			if (castUp.IsColliding() && castUp.GetCollider() is Godot.CharacterBody2D upBody && upBody.HasMethod("TakeHit"))
+			{
+				upBody.Call("TakeHit");
+			}
+			if (castDown.IsColliding() && castDown.GetCollider() is Godot.CharacterBody2D downBody && downBody.HasMethod("TakeHit"))
+			{
+				downBody.Call("TakeHit");
+			}
 			Attack();
 			TurnManagerNode.NextTurn("attack");
 		}
@@ -98,6 +111,7 @@ public partial class Player : CharacterBody2D
 			{
 				chestDown.Open();
 			}
+			
 		}
 	}
 
