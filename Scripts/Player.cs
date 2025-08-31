@@ -231,4 +231,9 @@ public partial class Player : CharacterBody2D
 	{
 		HoldingSword = true;
 	}
+
+	public void Heal(float amount)
+	{
+		health += amount;
+	}
 }

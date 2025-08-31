@@ -43,6 +43,11 @@ public partial class Inventory : Node2D
 		{
 			player.GiveSword();
 		}
+
+		if (item.ItemName == "Carrot")
+		{
+			player.Heal(20f);
+		}
 	}
 
 	public void RemoveItem(Item item)
@@ -53,5 +58,10 @@ public partial class Inventory : Node2D
 	public List<Item> GetItems()
 	{
 		return this.items;
+	}
+
+	public Player GetPlayer()
+	{
+		return player;
 	}
 }
