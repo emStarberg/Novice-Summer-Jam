@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cm8dp0arja355" path="res://Assets/treasureChest.png" id="2_bp1or"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ou3lj"]
-size = Vector2(19.9171, 19.9171)
+size = Vector2(14, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_astm7"]
 atlas = ExtResource("2_bp1or")
@@ -85,8 +85,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0.0414429, -0.0413818)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_ou3lj")
 
 [node name="Open" type="AnimatedSprite2D" parent="."]

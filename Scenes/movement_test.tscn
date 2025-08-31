@@ -1,17 +1,17 @@
 [gd_scene load_steps=84 format=4 uid="uid://cj1ms6ppfu66d"]
 
-[ext_resource type="Script" uid="uid://ddmv8finoosl0" path="res://Scripts/Player.cs" id="1_7bx3r"]
+[ext_resource type="Script" uid="uid://b6rcj05wlgsga" path="res://Scripts/Player.cs" id="1_7bx3r"]
 [ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_npj4n"]
-[ext_resource type="Script" uid="uid://mep0owgdqi1l" path="res://Scripts/TurnManager.cs" id="3_lcbp4"]
+[ext_resource type="Script" uid="uid://3y6cwjtpf66v" path="res://Scripts/TurnManager.cs" id="3_lcbp4"]
 [ext_resource type="Texture2D" uid="uid://rqdouckbmf1o" path="res://Assets/RabbitSwordIdle.png" id="3_tpxdn"]
 [ext_resource type="Texture2D" uid="uid://dhlbxrkqsabbi" path="res://Assets/RabbitSwordRun.png" id="4_kigfj"]
 [ext_resource type="Texture2D" uid="uid://cuxtacmbjjsos" path="res://Assets/RabbitVerticalAttack.png" id="5_rhva6"]
 [ext_resource type="Texture2D" uid="uid://628c68q2b37t" path="res://Assets/RabbitHorizontalAttack.png" id="6_8pchn"]
 [ext_resource type="Texture2D" uid="uid://hbar3x5y2y00" path="res://Assets/RabbitTakeDamage.png" id="7_ua7wb"]
-[ext_resource type="Script" uid="uid://bk01agsh4gwoo" path="res://Scripts/Inventory.cs" id="8_ygu0e"]
+[ext_resource type="Script" uid="uid://o480eehx1saq" path="res://Scripts/Inventory.cs" id="8_ygu0e"]
 [ext_resource type="Script" uid="uid://bglc4q3tp2kql" path="res://Scripts/Camera.cs" id="10_mpo7g"]
 [ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_uvhhi"]
-[ext_resource type="Script" uid="uid://dr885tblx8ynp" path="res://Scripts/HealthBar.cs" id="12_hoxcr"]
+[ext_resource type="Script" uid="uid://b73robho4qbhb" path="res://Scripts/HealthBar.cs" id="12_hoxcr"]
 [ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="13_vu6h4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jxyi"]
@@ -659,8 +659,9 @@ target_position = Vector2(-20, 0)
 [node name="CastRight" type="RayCast2D" parent="Player/Raycasts"]
 target_position = Vector2(21, 0)
 
-[node name="Inventory" type="Node2D" parent="Player"]
+[node name="Inventory" type="Node2D" parent="Player" node_paths=PackedStringArray("tiles")]
 script = ExtResource("8_ygu0e")
+tiles = []
 
 [node name="Turn Manager" type="Node2D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("3_lcbp4")
