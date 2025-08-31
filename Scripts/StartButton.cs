@@ -23,11 +23,8 @@ public partial class StartButton : Control
 {
 	if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
 	{
-	
-		// Load game here
+		// Load cutscene
+		GetTree().ChangeSceneToFile("res://Scenes/cutscene.tscn");
 	}
 }
 }
-
-// Example usage:
-// SetButtonImage("res://path/to/your/new_image.png");
