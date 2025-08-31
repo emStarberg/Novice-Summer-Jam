@@ -12,7 +12,7 @@ public partial class Chest() : StaticBody2D
 	private TurnManager turnManager;
 
 	// FOR TESTING PURPOSES
-	private Item item = new Sweater();
+	private Item item = new Sword();
 
 	private AnimatedSprite2D openAnim;
 	private Node currentOverlay;
