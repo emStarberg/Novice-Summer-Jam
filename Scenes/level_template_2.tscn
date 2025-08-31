@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=4 uid="uid://dxict1jbqnr0t"]
 
 [ext_resource type="Script" uid="uid://dyxnkn31gcqfk" path="res://level_template_2.gd" id="1_tmyrd"]
-[ext_resource type="PackedScene" uid="uid://dlpcegltfkatd" path="res://Scenes/chest.tscn" id="2_upeu0"]
+[ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="2_upeu0"]
 [ext_resource type="TileSet" uid="uid://bhpgem6m0hswm" path="res://Assets/rocktileset.tres" id="2_w5cw4"]
 [ext_resource type="PackedScene" uid="uid://npgtqaxmg766" path="res://Scenes/player.tscn" id="3_5skk6"]
-[ext_resource type="Script" uid="uid://deo3mmjf8iodc" path="res://Scenes/fog.gd" id="5_5skk6"]
+[ext_resource type="Script" uid="uid://deo3mmjf8iodc" path="res://Scripts/fog.gd" id="5_5skk6"]
 [ext_resource type="Texture2D" uid="uid://bea2obhmnlce4" path="res://Assets/LoadingScreen.png" id="6_5skk6"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tmyrd"]

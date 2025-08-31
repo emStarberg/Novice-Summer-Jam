@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=4 uid="uid://5fmq6p72bp0a"]
+[gd_scene load_steps=23 format=4 uid="uid://5fmq6p72bp0a"]
 
 [ext_resource type="Texture2D" uid="uid://c88vkytmb5x4r" path="res://Assets/Pasted image.png" id="1_5j5qt"]
 [ext_resource type="PackedScene" uid="uid://npgtqaxmg766" path="res://Scenes/player.tscn" id="8_j3onv"]
 [ext_resource type="Script" uid="uid://cxkswti1mnilu" path="res://Scripts/TurnManager.cs" id="9_8s4tn"]
 [ext_resource type="PackedScene" uid="uid://n7nke56qyap4" path="res://Scenes/slime_enemy.tscn" id="9_y270i"]
+[ext_resource type="Script" uid="uid://deo3mmjf8iodc" path="res://Scripts/fog.gd" id="10_di0ie"]
 [ext_resource type="Script" uid="uid://c4rt060b5ygr3" path="res://Scripts/Camera.cs" id="10_q8idb"]
 [ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_ihfy4"]
 [ext_resource type="Script" uid="uid://c344u4ry61ufo" path="res://Scripts/HealthBar.cs" id="12_d7vh7"]
@@ -462,6 +463,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p860o"]
+blend_mode = 3
+
 [node name="PlayerWithTilemap" type="Node2D"]
 
 [node name="Floor" type="TileMapLayer" parent="."]
@@ -589,7 +593,13 @@ scale = Vector2(0.382812, 0.382812)
 position = Vector2(376, 144)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("8_j3onv")]
+unique_name_in_owner = true
 position = Vector2(440, 240)
 
 [node name="SlimeEnemy" parent="." instance=ExtResource("9_y270i")]
 position = Vector2(489, 194)
+
+[node name="Fog" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_p860o")
+centered = false
+script = ExtResource("10_di0ie")
