@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvrla5v8nyqkm"]
 
 [ext_resource type="PackedScene" uid="uid://j47g70y1klup" path="res://Scenes/bat_enemy.tscn" id="1_y8hff"]
-[ext_resource type="Script" uid="uid://ddmv8finoosl0" path="res://Scripts/Player.cs" id="2_y3sds"]
+[ext_resource type="Script" uid="uid://dp115b1hglw5j" path="res://Scripts/Player.cs" id="2_y3sds"]
 [ext_resource type="Texture2D" uid="uid://e56k82lh5eqn" path="res://icon.svg" id="3_y4d4i"]
-[ext_resource type="Script" uid="uid://mep0owgdqi1l" path="res://Scripts/TurnManager.cs" id="4_vp7fm"]
+[ext_resource type="Script" uid="uid://db2ute4payr2m" path="res://Scripts/TurnManager.cs" id="4_vp7fm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e51mn"]
 size = Vector2(16, 16)

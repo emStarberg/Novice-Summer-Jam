@@ -16,10 +16,11 @@ public partial class Chest() : StaticBody2D
 
 	private AnimatedSprite2D openAnim;
 	private Node currentOverlay;
-
+	private AudioStreamPlayer2D audio;
 
 	public override void _Ready()
 	{
+		audio = GetNode<AudioStreamPlayer2D>("Audio");
 		openAnim = GetNode<AnimatedSprite2D>("Open");
 		openAnim.Animation = "open";
 
@@ -36,6 +37,7 @@ public partial class Chest() : StaticBody2D
 	{
 		if (item != null)
 		{
+			audio.Play();
 			turnManager.NextTurn("open_chest");
 			openAnim.Visible = true;
 			openAnim.Play();
