@@ -191,7 +191,7 @@ func _on_change_direction() -> void:
 	if not player_chase:
 		var angle: float = randf() * TAU
 		direction = Vector2(cos(angle), sin(angle)).normalized()
-    
+	
 func _on_detection_area_body_entered(body: Node) -> void:
 	if body.is_in_group("player") and body is CharacterBody2D:
 		player = body as CharacterBody2D

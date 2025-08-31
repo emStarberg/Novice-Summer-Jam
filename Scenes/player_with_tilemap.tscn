@@ -1,11 +1,11 @@
-[gd_scene load_steps=20 format=4 uid="uid://5fmq6p72bp0a"]
+[gd_scene load_steps=20 format=4 uid="uid://q1np26nneffp"]
 
 [ext_resource type="Texture2D" uid="uid://c88vkytmb5x4r" path="res://Assets/Pasted image.png" id="1_5j5qt"]
 [ext_resource type="PackedScene" uid="uid://npgtqaxmg766" path="res://Scenes/player.tscn" id="8_j3onv"]
-[ext_resource type="Script" uid="uid://db2ute4payr2m" path="res://Scripts/TurnManager.cs" id="9_8s4tn"]
-[ext_resource type="Script" uid="uid://bglc4q3tp2kql" path="res://Scripts/Camera.cs" id="10_q8idb"]
+[ext_resource type="Script" uid="uid://cxkswti1mnilu" path="res://Scripts/TurnManager.cs" id="9_8s4tn"]
+[ext_resource type="Script" uid="uid://c4rt060b5ygr3" path="res://Scripts/Camera.cs" id="10_q8idb"]
 [ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_ihfy4"]
-[ext_resource type="Script" uid="uid://db27fniwtku1f" path="res://Scripts/HealthBar.cs" id="12_d7vh7"]
+[ext_resource type="Script" uid="uid://c344u4ry61ufo" path="res://Scripts/HealthBar.cs" id="12_d7vh7"]
 [ext_resource type="Texture2D" uid="uid://bumj5h1w5aagi" path="res://Assets/inventoryTile.png" id="13_s88ph"]
 [ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="14_thv0f"]
 
