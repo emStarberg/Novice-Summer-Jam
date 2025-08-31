@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdlmu4etj56yf"
-path="res://.godot/imported/BatStandard_Flying.png-347951c3e209b8a77b4004d337b63fd2.ctex"
+uid="uid://uxexkbxit7di"
+path="res://.godot/imported/SlimeMovement.png-154cfc9104c094c58423deec01146f36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Standard/BatStandard_Flying.png"
-dest_files=["res://.godot/imported/BatStandard_Flying.png-347951c3e209b8a77b4004d337b63fd2.ctex"]
+source_file="res://Assets/SlimeMovement.png"
+dest_files=["res://.godot/imported/SlimeMovement.png-154cfc9104c094c58423deec01146f36.ctex"]
 
 [params]
 

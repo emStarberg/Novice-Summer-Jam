@@ -1,5 +1,8 @@
 [gd_scene load_steps=85 format=4 uid="uid://cj1ms6ppfu66d"]
 
+[ext_resource type="Script" uid="uid://kvin8xcxii1f" path="res://Scripts/Player.cs" id="1_7bx3r"]
+[ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_npj4n"]
+[ext_resource type="Script" uid="uid://cxkswti1mnilu" path="res://Scripts/TurnManager.cs" id="3_lcbp4"]
 [ext_resource type="Script" uid="uid://dp115b1hglw5j" path="res://Scripts/Player.cs" id="1_7bx3r"]
 [ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_npj4n"]
 [ext_resource type="Script" uid="uid://db2ute4payr2m" path="res://Scripts/TurnManager.cs" id="3_lcbp4"]
@@ -8,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://cuxtacmbjjsos" path="res://Assets/RabbitVerticalAttack.png" id="5_rhva6"]
 [ext_resource type="Texture2D" uid="uid://628c68q2b37t" path="res://Assets/RabbitHorizontalAttack.png" id="6_8pchn"]
 [ext_resource type="Texture2D" uid="uid://hbar3x5y2y00" path="res://Assets/RabbitTakeDamage.png" id="7_ua7wb"]
+[ext_resource type="Script" uid="uid://cewtk2ox4dee" path="res://Scripts/Inventory.cs" id="8_ygu0e"]
+[ext_resource type="Script" uid="uid://c4rt060b5ygr3" path="res://Scripts/Camera.cs" id="10_mpo7g"]
+[ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_uvhhi"]
+[ext_resource type="Script" uid="uid://c344u4ry61ufo" path="res://Scripts/HealthBar.cs" id="12_hoxcr"]
 [ext_resource type="Script" uid="uid://buymft1j0yoge" path="res://Scripts/Inventory.cs" id="8_ygu0e"]
 [ext_resource type="AudioStream" uid="uid://b21tqug88550q" path="res://audio/Walking_On_Grass_Slow.wav" id="9_tpxdn"]
 [ext_resource type="Script" uid="uid://bglc4q3tp2kql" path="res://Scripts/Camera.cs" id="10_mpo7g"]
@@ -15,7 +22,7 @@
 [ext_resource type="Script" uid="uid://db27fniwtku1f" path="res://Scripts/HealthBar.cs" id="12_hoxcr"]
 [ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="13_vu6h4"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jxyi"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_npj4n"]
 texture = ExtResource("1_npj4n")
 0:0/0 = 0
 1:0/0 = 0
@@ -66,7 +73,7 @@ texture = ExtResource("1_npj4n")
 16:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tuftd"]
-sources/0 = SubResource("TileSetAtlasSource_5jxyi")
+sources/0 = SubResource("TileSetAtlasSource_npj4n")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e51mn"]
 size = Vector2(16, 16)
@@ -698,6 +705,7 @@ offset_right = 28.7023
 offset_bottom = 26.4762
 scale = Vector2(0.677087, 0.677087)
 text = "- %"
+metadata/_edit_use_anchors_ = true
 
 [node name="Chest" parent="." instance=ExtResource("13_vu6h4")]
 position = Vector2(424, 280)

@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=142 format=3 uid="uid://npgtqaxmg766"]
+
 
 [ext_resource type="Script" uid="uid://dp115b1hglw5j" path="res://Scripts/Player.cs" id="1_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://doq8g3ib80ncb" path="res://Assets/RabbitIdle.png" id="2_tx1dd"]
@@ -13,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bcp88lxtb33mu" path="res://Assets/RabbitVerticalAttackRed.png" id="8_ukyrk"]
 [ext_resource type="Texture2D" uid="uid://suuw1q47ejx1" path="res://Assets/RabbitHorizontalAttackRed.png" id="9_7dp3o"]
 [ext_resource type="Script" uid="uid://buymft1j0yoge" path="res://Scripts/Inventory.cs" id="9_qqcod"]
+[ext_resource type="Texture2D" uid="uid://dg18khr4nlbd8" path="res://Assets/RabbitDeath.png" id="13_qqcod"]
 [ext_resource type="AudioStream" uid="uid://b21tqug88550q" path="res://audio/Walking_On_Grass_Slow.wav" id="14_fd4e3"]
 [ext_resource type="AudioStream" uid="uid://dy8wmkke7oyfc" path="res://audio/Hit_Enamy_2.wav" id="15_qqcod"]
 [ext_resource type="AudioStream" uid="uid://uoky0t6mytcg" path="res://audio/Slash2.wav" id="16_igrcy"]
@@ -1039,8 +1042,117 @@ animations = [{
 "speed": 5.0
 }]
 
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igrcy"]
 blend_mode = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b312"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lisdf"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1x1j"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8b32"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj1g2"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usbl8"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtg1u"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuaet"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqbau"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5f5t"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvbpb"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sscpr"]
+atlas = ExtResource("13_qqcod")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_by7i4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lisdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1x1j")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8b32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj1g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usbl8")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtg1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuaet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqbau")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5f5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvbpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sscpr")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_f1ek2")
@@ -1072,6 +1184,11 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_astm7")
 animation = &"down"
 
+[node name="Die" type="AnimatedSprite2D" parent="Animations"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_by7i4")
+animation = &"up"
+
 [node name="Raycasts" type="Node2D" parent="."]
 
 [node name="CastDown" type="RayCast2D" parent="Raycasts"]
@@ -1089,13 +1206,15 @@ target_position = Vector2(21, 0)
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("9_qqcod")
 
-[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Move" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("14_fd4e3")
 
-[node name="playerHitAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="Hit" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("15_qqcod")
 
-[node name="swordAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="Sword" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("16_igrcy")
 
 [node name="Fog" type="Sprite2D" parent="."]
@@ -1107,3 +1226,4 @@ script = ExtResource("17_qqcod")
 [connection signal="animation_finished" from="Animations/Move" to="." method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Animations/Attack" to="." method="OnAttackAnimFinished"]
 [connection signal="animation_finished" from="Animations/Hurt" to="." method="OnHurtAnimFinished"]
+[connection signal="animation_finished" from="Animations/Die" to="." method="OnDeathAnimFinished"]
