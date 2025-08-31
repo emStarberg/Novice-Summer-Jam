@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=8 format=4 uid="uid://dxict1jbqnr0t"]
 
 [ext_resource type="Script" uid="uid://dyxnkn31gcqfk" path="res://level_template_2.gd" id="1_tmyrd"]
@@ -6,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dsc2lh1fsh4nf" path="res://Scenes/player.tscn" id="3_5skk6"]
 [ext_resource type="PackedScene" path="res://Scenes/bat_enemy.tscn" id="4_ilh3q"]
 [ext_resource type="Texture2D" uid="uid://bea2obhmnlce4" path="res://Assets/LoadingScreen.png" id="6_5skk6"]
+
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tmyrd"]
 noise_type = 2

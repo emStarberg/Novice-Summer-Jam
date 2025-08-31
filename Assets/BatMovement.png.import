@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v5mhe705hnv7"
-path="res://.godot/imported/BatStandard_Sheet.png-12a6c873021c59b6049139cb51ab3f30.ctex"
+uid="uid://cdmcoktqiaagc"
+path="res://.godot/imported/BatMovement.png-d5f9d277d3e097ef4b8a49a8e4807223.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Standard/BatStandard_Sheet.png"
-dest_files=["res://.godot/imported/BatStandard_Sheet.png-12a6c873021c59b6049139cb51ab3f30.ctex"]
+source_file="res://Assets/BatMovement.png"
+dest_files=["res://.godot/imported/BatMovement.png-d5f9d277d3e097ef4b8a49a8e4807223.ctex"]
 
 [params]
 
