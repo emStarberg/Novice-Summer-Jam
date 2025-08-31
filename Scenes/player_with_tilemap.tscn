@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bumj5h1w5aagi" path="res://Assets/inventoryTile.png" id="13_s88ph"]
 [ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="14_thv0f"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhh81"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_di0ie"]
 texture = ExtResource("1_5j5qt")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -397,7 +397,7 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_xhh81")
+sources/0 = SubResource("TileSetAtlasSource_di0ie")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lykbi"]
 atlas = ExtResource("11_ihfy4")
