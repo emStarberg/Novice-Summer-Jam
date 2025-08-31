@@ -11,6 +11,9 @@ var last_direction: Vector2 = Vector2(0, 1)  # Last move direction for idle faci
 var move_target: Vector2 = Vector2.ZERO      # Target position for smooth movement
 var is_moving: bool = false                  # Currently moving
 
+var move_interval: float = 1.0
+var new_pos: Vector2 = Vector2.ZERO
+
 # --- Player detection ---
 var player_chase: bool = false
 var player: CharacterBody2D = null
@@ -22,13 +25,19 @@ var attack_cooldown: float = 5.0   # idle after attack (seconds)
 var can_attack: bool = true
 var is_attacking: bool = false
 
+
+
 # --- Sprites ---
 @onready var idle_sprite: AnimatedSprite2D = $Animations/Idle
 @onready var movement_sprite: AnimatedSprite2D = $Animations/Movement
 @onready var attack_sprite: AnimatedSprite2D = $Animations/Attack
 
+@onready var turn_manager: Node = get_parent().get_node("Turn Manager") # Get turn manager as Node2D
+
+
 # --- Setup ---
 func _ready() -> void:
+	turn_manager.connect("EnemyTurn", Callable(self, "TakeTurn"))
 	randomize()
 	player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 
@@ -169,6 +178,7 @@ func _on_detection_area_body_entered(body: Node) -> void:
 	if body.is_in_group("player") and body is CharacterBody2D:
 		player = body as CharacterBody2D
 		player_chase = true
+		
 
 func _on_detection_area_body_exited(body: Node) -> void:
 	if body == player:

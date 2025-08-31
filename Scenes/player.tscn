@@ -1208,8 +1208,6 @@ stream = ExtResource("15_qqcod")
 [node name="Sword" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("16_igrcy")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [connection signal="animation_finished" from="Animations/Move" to="." method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Animations/Attack" to="." method="OnAttackAnimFinished"]
 [connection signal="animation_finished" from="Animations/Hurt" to="." method="OnHurtAnimFinished"]

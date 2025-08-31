@@ -1,8 +1,5 @@
 using Godot;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 // -----------------------------------------------------------------------------
 // Player.cs
 // Author: Emily Braithwaite
@@ -30,7 +27,7 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		// Set up animations
-		TurnManagerNode = (TurnManager)GetParent().GetNode<Node2D>("Turn Manager");
+		TurnManagerNode = (TurnManager)GetParent().GetNode<Node>("Turn Manager");
 		Healthbar = (HealthBar)GetParent().GetNode<AnimatedSprite2D>("CanvasLayer/Gameplay UI/Health Bar");
 		animFolder = GetNode<Node2D>("Animations");
 		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Idle");
