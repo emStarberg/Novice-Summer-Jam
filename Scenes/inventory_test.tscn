@@ -1,72 +1,18 @@
-[gd_scene load_steps=85 format=4 uid="uid://8omd4kumywna"]
+[gd_scene load_steps=82 format=3 uid="uid://8omd4kumywna"]
 
-[ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_f87gc"]
-[ext_resource type="Script" uid="uid://ddmv8finoosl0" path="res://Scripts/Player.cs" id="2_jon5c"]
+[ext_resource type="Script" uid="uid://b6rcj05wlgsga" path="res://Scripts/Player.cs" id="2_jon5c"]
 [ext_resource type="Texture2D" uid="uid://rqdouckbmf1o" path="res://Assets/RabbitSwordIdle.png" id="3_weulf"]
 [ext_resource type="Texture2D" uid="uid://dhlbxrkqsabbi" path="res://Assets/RabbitSwordRun.png" id="4_0j67v"]
 [ext_resource type="Texture2D" uid="uid://cuxtacmbjjsos" path="res://Assets/RabbitVerticalAttack.png" id="5_h74se"]
 [ext_resource type="Texture2D" uid="uid://628c68q2b37t" path="res://Assets/RabbitHorizontalAttack.png" id="6_65col"]
 [ext_resource type="Texture2D" uid="uid://hbar3x5y2y00" path="res://Assets/RabbitTakeDamage.png" id="7_gqkot"]
-[ext_resource type="Script" uid="uid://bk01agsh4gwoo" path="res://Scripts/Inventory.cs" id="8_ecl0l"]
-[ext_resource type="Script" uid="uid://mep0owgdqi1l" path="res://Scripts/TurnManager.cs" id="9_s1r7n"]
+[ext_resource type="Script" uid="uid://o480eehx1saq" path="res://Scripts/Inventory.cs" id="8_ecl0l"]
+[ext_resource type="Script" uid="uid://3y6cwjtpf66v" path="res://Scripts/TurnManager.cs" id="9_s1r7n"]
 [ext_resource type="Script" uid="uid://bglc4q3tp2kql" path="res://Scripts/Camera.cs" id="10_hkphs"]
 [ext_resource type="Texture2D" uid="uid://bghcwq6rnhkt0" path="res://Assets/HealthBar.png" id="11_wkwwd"]
-[ext_resource type="Script" uid="uid://dr885tblx8ynp" path="res://Scripts/HealthBar.cs" id="12_4xhmh"]
+[ext_resource type="Script" uid="uid://b73robho4qbhb" path="res://Scripts/HealthBar.cs" id="12_4xhmh"]
 [ext_resource type="Texture2D" uid="uid://bumj5h1w5aagi" path="res://Assets/inventoryTile.png" id="13_o4715"]
 [ext_resource type="PackedScene" uid="uid://bsbgun0yywos1" path="res://Scenes/chest.tscn" id="14_chy34"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jxyi"]
-texture = ExtResource("1_f87gc")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-4:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-9:0/0 = 0
-10:0/0 = 0
-12:0/0 = 0
-13:0/0 = 0
-15:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-4:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-9:1/0 = 0
-10:1/0 = 0
-12:1/0 = 0
-13:1/0 = 0
-15:1/0 = 0
-16:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-4:2/0 = 0
-6:3/0 = 0
-7:3/0 = 0
-9:3/0 = 0
-10:3/0 = 0
-12:3/0 = 0
-13:3/0 = 0
-15:3/0 = 0
-16:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-4:4/0 = 0
-6:4/0 = 0
-7:4/0 = 0
-9:4/0 = 0
-10:4/0 = 0
-12:4/0 = 0
-13:4/0 = 0
-15:4/0 = 0
-16:4/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_tuftd"]
-sources/0 = SubResource("TileSetAtlasSource_5jxyi")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e51mn"]
 size = Vector2(16, 16)
@@ -607,11 +553,6 @@ animations = [{
 
 [node name="Node2D" type="Node2D"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["Floor"]]
-visible = false
-tile_map_data = PackedByteArray("AAAeABMAAAAEAAEAAAAdABMAAAAEAAEAAAAcABMAAAAEAAEAAAAfABMAAAAEAAEAAAAfABIAAAAEAAEAAAAeABIAAAAEAAEAAAAdABIAAAAEAAEAAAAcABIAAAAEAAEAAAAfABQAAAAEAAEAAAAeABQAAAAEAAEAAAAdABQAAAAEAAEAAAAcABQAAAAEAAEAAAAbABQAAAAEAAEAAAAbABMAAAAEAAEAAAAbABIAAAAEAAEAAAAbABEAAAAEAAEAAAAcABEAAAAEAAEAAAAdABEAAAAEAAEAAAAeABEAAAAEAAEAAAAfABEAAAAEAAEAAAAgABEAAAAEAAEAAAAgABIAAAAEAAEAAAAgABMAAAAEAAEAAAAgABQAAAAEAAEAAAAfABUAAAAEAAEAAAAeABUAAAAEAAEAAAAdABUAAAAEAAEAAAAcABUAAAAEAAEAAAAbABUAAAAEAAEAAAAaABUAAAAEAAEAAAAaABQAAAAEAAEAAAAaABMAAAAEAAEAAAAaABIAAAAEAAEAAAAaABEAAAAEAAEAAAAgABUAAAAEAAEAAAA=")
-tile_set = SubResource("TileSet_tuftd")
-
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode", "Healthbar")]
 position = Vector2(424, 344)
 script = ExtResource("2_jon5c")
@@ -744,6 +685,7 @@ position = Vector2(8, 8)
 scale = Vector2(0.382812, 0.382812)
 
 [node name="Tile3" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
 offset_left = 1056.0
 offset_top = 219.0
 offset_right = 1072.0
@@ -756,6 +698,7 @@ position = Vector2(8, 8)
 scale = Vector2(0.382812, 0.382812)
 
 [node name="Tile4" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
 offset_left = 1056.0
 offset_top = 283.0
 offset_right = 1072.0
@@ -768,6 +711,7 @@ position = Vector2(8, 8)
 scale = Vector2(0.382812, 0.382812)
 
 [node name="Tile5" type="TextureRect" parent="CanvasLayer/Inventory"]
+layout_mode = 0
 offset_left = 1056.0
 offset_top = 347.0
 offset_right = 1072.0
