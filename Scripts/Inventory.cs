@@ -44,9 +44,9 @@ public partial class Inventory : Node2D
 			player.GiveSword();
 		}
 
-		if (item.ItemName == "Carrot")
+		if (item.ItemName == "Sweater")
 		{
-			player.Heal(20f);
+			player.GiveSweater();
 		}
 	}
 

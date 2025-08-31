@@ -22,6 +22,7 @@ public partial class Player : CharacterBody2D
 	private Node2D animFolder, raycastFolder;
 	private RayCast2D castLeft, castRight, castUp, castDown;
 	private bool HoldingSword = false;
+	private bool WearingSweater = false;
 
 	public override void _Ready()
 	{
@@ -91,10 +92,13 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	private void SetFacingAnim()
 	{
-		if (HoldingSword)
+		if (WearingSweater)
+		{
+			currentAnim.Animation = "sweater_" + facing;
+		}
+		else if (HoldingSword)
 		{
 			currentAnim.Animation = "sword_" + facing;
-
 		}
 		else
 		{
@@ -230,6 +234,11 @@ public partial class Player : CharacterBody2D
 	public void GiveSword()
 	{
 		HoldingSword = true;
+	}
+
+	public void GiveSweater()
+	{
+		WearingSweater = true;
 	}
 
 	public void Heal(float amount)
