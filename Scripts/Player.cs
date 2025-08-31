@@ -21,9 +21,9 @@ public partial class Player : CharacterBody2D
 	private Label healthLabel;
 	private Node2D animFolder, raycastFolder;
 	private RayCast2D castLeft, castRight, castUp, castDown;
-	private AudioStreamPlayer2D Audio;
+	private AudioStreamPlayer2D moveAudio;
 	private AudioStreamPlayer2D swordAudio;
-	private AudioStreamPlayer2D playerHitAudio;
+	private AudioStreamPlayer2D hitAudio;
 	private bool HoldingSword = false;
 	private bool WearingSweater = false;
 
@@ -49,9 +49,9 @@ public partial class Player : CharacterBody2D
 		castDown = raycastFolder.GetNode<RayCast2D>("CastDown");
 
 		healthLabel = Healthbar.GetNode<Label>("Health Label");
-		Audio = GetNode<AudioStreamPlayer2D>("Audio");
-		swordAudio = GetNode<AudioStreamPlayer2D>("swordAudio");
-		playerHitAudio = GetNode<AudioStreamPlayer2D>("playerHitAudio");
+		moveAudio = GetNode<AudioStreamPlayer2D>("Audio/Move");
+		swordAudio = GetNode<AudioStreamPlayer2D>("Audio/Sword");
+		hitAudio = GetNode<AudioStreamPlayer2D>("Audio/Hit");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -169,7 +169,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(16, 0);
 				TurnManagerNode.NextTurn("right");
 				SwitchAnim(moveAnim);
-				Audio.Play();
+				moveAudio.Play();
 			}
 		}
 		else if (Input.IsActionJustPressed("ui_left"))
@@ -180,7 +180,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(-16, 0);
 				TurnManagerNode.NextTurn("left");
 				SwitchAnim(moveAnim);
-				Audio.Play();
+				moveAudio.Play();
 			}
 		}
 		else if (Input.IsActionJustPressed("ui_down"))
@@ -191,7 +191,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(0, 16);
 				TurnManagerNode.NextTurn("down");
 				SwitchAnim(moveAnim);
-				Audio.Play();
+				moveAudio.Play();
 			}
 		}
 		else if (Input.IsActionJustPressed("ui_up"))
@@ -202,7 +202,7 @@ public partial class Player : CharacterBody2D
 				moveTarget = Position + new Vector2(0, -16);
 				TurnManagerNode.NextTurn("up");
 				SwitchAnim(moveAnim);
-				Audio.Play();
+				moveAudio.Play();
 			}
 		}
 	}
@@ -215,7 +215,7 @@ public partial class Player : CharacterBody2D
 	{
 		health -= amount;
 		SwitchAnim(hurtAnim);
-		playerHitAudio.Play(); 
+		hitAudio.Play(); 
 	}
 
 	/// <summary>

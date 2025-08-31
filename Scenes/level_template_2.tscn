@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://dxict1jbqnr0t"]
+[gd_scene load_steps=4 format=4 uid="uid://duugftgwtcaiw"]
 
-[ext_resource type="Script" uid="uid://dyxnkn31gcqfk" path="res://level_template_2.gd" id="1_tmyrd"]
-[ext_resource type="TileSet" uid="uid://bhpgem6m0hswm" path="res://Assets/rocktileset.tres" id="2_w5cw4"]
+[ext_resource type="Script" path="res://level_template_2.gd" id="1_tmyrd"]
+[ext_resource type="TileSet" uid="uid://cy7j7df6ygric" path="res://Assets/rocktileset.tres" id="2_w5cw4"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tmyrd"]
 noise_type = 0
