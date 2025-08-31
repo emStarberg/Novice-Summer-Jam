@@ -1,8 +1,9 @@
-[gd_scene load_steps=84 format=4 uid="uid://dvrla5v8nyqkm"]
+[gd_scene load_steps=85 format=4 uid="uid://dvrla5v8nyqkm"]
 
 [ext_resource type="Texture2D" uid="uid://du4bywgu2ep7l" path="res://Assets/GrassDirt.png" id="1_iax1w"]
 [ext_resource type="PackedScene" uid="uid://j47g70y1klup" path="res://Scenes/bat_enemy.tscn" id="1_y8hff"]
 [ext_resource type="Script" uid="uid://b40kktedhmfot" path="res://Scripts/PlayerEnemyVersion.cs" id="2_iax1w"]
+[ext_resource type="PackedScene" uid="uid://n7nke56qyap4" path="res://Scenes/slime_enemy.tscn" id="3_jtcqy"]
 [ext_resource type="Texture2D" uid="uid://rqdouckbmf1o" path="res://Assets/RabbitSwordIdle.png" id="4_ghphp"]
 [ext_resource type="Texture2D" uid="uid://dhlbxrkqsabbi" path="res://Assets/RabbitSwordRun.png" id="5_iax1w"]
 [ext_resource type="Texture2D" uid="uid://cuxtacmbjjsos" path="res://Assets/RabbitVerticalAttack.png" id="6_jtcqy"]
@@ -622,6 +623,15 @@ position = Vector2(226, 187)
 
 [node name="BatEnemy3" parent="EnemyContainer" instance=ExtResource("1_y8hff")]
 position = Vector2(404, 94)
+
+[node name="SlimeEnemy3" parent="EnemyContainer" instance=ExtResource("3_jtcqy")]
+position = Vector2(81, 235)
+
+[node name="SlimeEnemy2" parent="EnemyContainer" instance=ExtResource("3_jtcqy")]
+position = Vector2(324, 251)
+
+[node name="SlimeEnemy" parent="EnemyContainer" instance=ExtResource("3_jtcqy")]
+position = Vector2(306, 190)
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TurnManagerNode", "Healthbar") groups=["player"]]
 position = Vector2(424, 167)
