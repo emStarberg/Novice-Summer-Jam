@@ -6,39 +6,70 @@ extends Node
 
 @onready var tilemap: TileMapLayer = %tilemap
 @onready var tile_size: int = tilemap.tile_set.tile_size.x
-@onready var max_x: int = tilemap.get_used_rect().end.x
-@onready var max_y: int = tilemap.get_used_rect().end.y
+
+@export var max_x: int = 50
+@export var max_y: int = 50
 
 @export var noise: FastNoiseLite
-@export_range(-1, 1, 0.01) var noise_threshold: float
+@export var offset: GradientTexture2D
+@export_range(0.1, 1, 0.01) var noise_threshold: float
 
 func _ready() -> void:
-	call_deferred("generate")
+	offset.width = max_x
+	offset.height = max_y
+	generate()
 	loading_screen.visible = false
 
+func index(x: int, y: int) -> float:
+	return ((noise.get_noise_2d(x, y) + 1.0) * 0.5) * \
+	offset.get_image().get_pixel(x, y).get_luminance()
+
 func generate() -> void:
-	for child: Node2D in points.get_children():
-		child.position = Vector2(randi_range(0, max_x) * tile_size, randi_range(0, max_y) * tile_size)
-	
 	noise.seed = randi()
+	
+	var all_cells : Array[Vector2i]
+	for x in max_x:
+		for y in max_y:
+				#tilemap.set_cell(Vector2i(x, y), 1, Vector2i(10, 1), 1)
+			all_cells.append(Vector2i(x, y))
+	
+	tilemap.set_cells_terrain_connect(all_cells, 0, 0)
 	
 	for x in max_x:
 		for y in max_y:
-			if noise.get_noise_2d(x, y) > noise_threshold:
-				tilemap.set_cells_terrain_connect([Vector2i(x, y)], 0, 1)
+			if index(x, y) > noise_threshold:
+				tilemap.set_cells_terrain_connect([Vector2i(x, y)], 0, 1) # air
 			else: # Can break paths
-				tilemap.set_cells_terrain_connect([Vector2i(x, y)], 0, 0)
+				tilemap.set_cells_terrain_connect([Vector2i(x, y)], 0, 0) # wall
 	
-	if !await all_connected():
-		generate()
+	tilemap.set_cells_terrain_connect([Vector2i(max_x / 2, max_y / 2)], 0, 1) # air
+	
+	var validlocations := find_connected(Vector2i(max_x / 2, max_y / 2))
+	
+	for child in points.get_children():
+		if !child is Node2D:
+			continue
+		var location: Vector2i = validlocations.pick_random()
+		(child as Node2D).position = location * tile_size
+		validlocations.erase(location)
 
-func all_connected() -> bool:
-	for child: Node2D in points.get_children():
-		if !await are_connected(child.position):
-			return false
-	return true
+func neighboring(start: Vector2i) -> Array[Vector2i]:
+	return [start + Vector2i(0, -1),
+			start + Vector2i(-1, 0),
+			start + Vector2i(0, 1),
+			start + Vector2i(1, 0)]
 
-func are_connected(p: Vector2) -> bool:
-	await NavigationServer2D.map_changed
-	var closest_point := NavigationServer2D.map_get_closest_point(tilemap.get_navigation_map(), p)
-	return (closest_point - p).is_zero_approx()
+func find_connected(start: Vector2i) -> Array:
+	var tile := tilemap.get_cell_atlas_coords(start)
+	var result: Array[Vector2i] = [start]
+	var search: Array[Vector2i] = [start]
+	
+	while search.size() != 0:
+		for neighbor in neighboring(search.front() as Vector2i):
+			if tilemap.get_cell_atlas_coords(neighbor) != tile || result.has(neighbor):
+				continue
+			result.push_back(neighbor)
+			search.push_back(neighbor)
+		search.remove_at(0)
+	
+	return result
