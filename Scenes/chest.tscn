@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dlpcegltfkatd"]
+[gd_scene load_steps=11 format=3 uid="uid://bsbgun0yywos1"]
 
 [ext_resource type="Script" uid="uid://mr57ws5k4vlb" path="res://Scripts/Chest.cs" id="1_8uwsg"]
 [ext_resource type="Texture2D" uid="uid://cm8dp0arja355" path="res://Assets/treasureChest.png" id="2_bp1or"]

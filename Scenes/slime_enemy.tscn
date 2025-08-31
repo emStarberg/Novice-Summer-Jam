@@ -1,7 +1,7 @@
 [gd_scene load_steps=101 format=3 uid="uid://n7nke56qyap4"]
 
 [ext_resource type="Texture2D" uid="uid://hugj6y0gucja" path="res://Assets/SlimeIdle.png" id="1_3pdw6"]
-[ext_resource type="Script" uid="uid://ty8so3gy35yn" path="res://scripts/slime_enemy.gd" id="1_osevl"]
+[ext_resource type="Script" uid="uid://ty8so3gy35yn" path="res://Scripts/slime_enemy.gd" id="1_osevl"]
 [ext_resource type="Texture2D" uid="uid://uxexkbxit7di" path="res://Assets/SlimeMovement.png" id="2_osevl"]
 [ext_resource type="Texture2D" uid="uid://eay54qntg2qy" path="res://Assets/SlimeVerticalAttack.png" id="3_niwyw"]
 [ext_resource type="Texture2D" uid="uid://cw84meml37yf3" path="res://Assets/SlimeHorizontalAttack.png" id="4_5gpua"]
@@ -719,7 +719,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ln340"]
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
-position = Vector2(463, 225)
+position = Vector2(0, 1)
 script = ExtResource("1_osevl")
 
 [node name="Animations" type="Node2D" parent="."]
