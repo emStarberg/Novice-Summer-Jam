@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnugbgxjwvccn"]
+
+[ext_resource type="Texture2D" uid="uid://bs3chmmbbn862" path="res://Assets/GameOverScreen.png" id="1_amiou"]
+[ext_resource type="FontFile" uid="uid://keh75kikoyf" path="res://Assets/Jersey10-Regular.ttf" id="2_vb6s7"]
+[ext_resource type="Script" uid="uid://jh5n1bqfpll3" path="res://Scripts/RetryButton.cs" id="3_tpvs2"]
+[ext_resource type="Texture2D" uid="uid://bgilbcp1unc8t" path="res://Assets/Startbutton.png" id="4_l3qio"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 1157.0
+offset_bottom = 651.0
+texture = ExtResource("1_amiou")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.140017
+anchor_top = -0.149002
+anchor_right = -0.140017
+anchor_bottom = -0.149002
+offset_left = 355.0
+offset_top = 241.0
+offset_right = 808.0
+offset_bottom = 323.0
+theme_override_fonts/font = ExtResource("2_vb6s7")
+theme_override_font_sizes/font_size = 75
+text = "YOU DIED"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Control" parent="CanvasLayer/Control/ColorRect"]
+layout_mode = 1
+anchor_left = -0.191011
+anchor_top = -0.267281
+anchor_right = -0.0890233
+anchor_bottom = -0.267281
+offset_left = 498.0
+offset_top = 409.0
+offset_right = 654.0
+offset_bottom = 475.0
+script = ExtResource("3_tpvs2")
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/Control/ColorRect/Button"]
+position = Vector2(140, 39)
+scale = Vector2(5.50398, 3.33463)
+texture = ExtResource("4_l3qio")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ColorRect/Button/Sprite"]
+offset_left = -13.6265
+offset_top = -8.09685
+offset_right = 176.374
+offset_bottom = 46.9032
+scale = Vector2(0.150143, 0.250964)
+theme_override_fonts/font = ExtResource("2_vb6s7")
+theme_override_font_sizes/font_size = 50
+text = "TRY AGAIN"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="CanvasLayer/Control/ColorRect/Button" to="CanvasLayer/Control/ColorRect/Button" method="OnMouseEntered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/ColorRect/Button" to="CanvasLayer/Control/ColorRect/Button" method="OnMouseExited"]

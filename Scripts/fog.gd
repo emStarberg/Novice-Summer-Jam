@@ -20,6 +20,7 @@ func _ready() -> void:
 	fogImage.fill(Color.BLACK)
 	lightImage.convert(Image.FORMAT_RGBAH)
 	scale *= GRID_SIZE
+	update_fog((player as Node2D).position / GRID_SIZE)
 
 func update_fog(new_grid_position:Vector2) -> void:
 	

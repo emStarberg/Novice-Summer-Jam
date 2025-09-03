@@ -8,10 +8,8 @@ public partial class CutscenePlayer : AnimationPlayer
 		Play("Opening");
 	}
 
-	public void OnAnimationFinished()
-	{
-		// Alex please change this file path
-		// GetTree().ChangeSceneToFile("res://Scenes/player_with_tilemap.tscn");
-		//EmitSignal(signalbus.SignalName.cutscenedone);
-	}
+	public void OnAnimationFinished(string animName)
+{
+	GetTree().ChangeSceneToFile("res://Scenes/main_level.tscn");
+}
 }

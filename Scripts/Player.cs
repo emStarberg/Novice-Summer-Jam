@@ -24,6 +24,7 @@ public partial class Player : CharacterBody2D
 	private bool HoldingSword = false;
 	private bool WearingSweater = false;
 	private bool alive = true;
+	private bool canMove = false;
 	public override void _Ready()
 	{
 		// Set up animations
@@ -59,13 +60,17 @@ public partial class Player : CharacterBody2D
 		{
 			Die();
 		}
-		HandleMovement(delta);
+		if (canMove)
+		{
+			HandleMovement(delta);
+		}
+		
 		SetFacingAnim();
 		// Update health bar
 		Healthbar.SetHealth(health);
 		healthLabel.Text = health + "%";
 
-		if (Input.IsActionJustPressed("ui_accept") && HoldingSword)
+		if (Input.IsActionJustPressed("ui_accept") && HoldingSword && canMove)
 		{
 			if (castRight.IsColliding() && castRight.GetCollider() is Godot.CharacterBody2D rightBody && rightBody.HasMethod("TakeHit"))
 			{
@@ -87,13 +92,7 @@ public partial class Player : CharacterBody2D
 			TurnManagerNode.NextTurn("attack");
 		}
 
-		// FOR TESTING PURPOSES
-		else if (Input.IsActionJustPressed("ui_text_indent"))
-		{
-			Hurt(20);
-		}
-
-		if (Input.IsActionJustPressed("input_interact"))
+		if (Input.IsActionJustPressed("input_interact") && canMove)
 		{
 			if (castRight.IsColliding() && castRight.GetCollider() is Chest chestRight)
 			{
@@ -111,7 +110,7 @@ public partial class Player : CharacterBody2D
 			{
 				chestDown.Open();
 			}
-			
+
 		}
 	}
 
@@ -285,7 +284,15 @@ public partial class Player : CharacterBody2D
 	/// <param name="amount">How much to heal</param>
 	public void Heal(float amount)
 	{
-		health += amount;
+		if (health + amount <= 100)
+		{
+			health += amount;
+		}
+		else
+		{
+			health = 100;
+		}
+
 	}
 
 	/// <summary>
@@ -295,7 +302,7 @@ public partial class Player : CharacterBody2D
 	{
 		SwitchAnim(deathAnim);
 		alive = false;
-		
+
 	}
 
 	/// <summary>
@@ -305,5 +312,10 @@ public partial class Player : CharacterBody2D
 	{
 		GetTree().Quit();
 		// End of game logic here
+	}
+	
+	public void OnOkPressed()
+	{
+		canMove = true;
 	}
 }

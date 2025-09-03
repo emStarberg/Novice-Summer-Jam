@@ -5,8 +5,11 @@
 [node name="Chest item overlay" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 577.0
-offset_bottom = 324.0
+offset_left = -78.0
+offset_top = -40.0
+offset_right = 499.0
+offset_bottom = 284.0
+scale = Vector2(0.998527, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -14,40 +17,41 @@ offset_left = 367.0
 offset_top = 184.0
 offset_right = 683.0
 offset_bottom = 391.0
-scale = Vector2(1.36, 1.36)
+scale = Vector2(1.84, 1.84)
 color = Color(0.168627, 0.168627, 0.168627, 0.984314)
 
 [node name="Item Name" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 92.6468
+offset_left = 86.6685
 offset_top = 5.88234
-offset_right = 222.647
+offset_right = 216.669
 offset_bottom = 39.8823
-scale = Vector2(1.01529, 1.01529)
+scale = Vector2(1.12399, 1.12399)
 theme_override_font_sizes/font_size = 24
 text = "Item Name"
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 97.7939
-offset_top = 138.97
-offset_right = 280.794
-offset_bottom = 161.97
-scale = Vector2(0.676471, 0.676471)
-text = "Item Description"
+offset_left = 1.0
+offset_top = 125.826
+offset_right = 413.0
+offset_bottom = 226.826
+scale = Vector2(0.763427, 0.763427)
+text = "Description goes here
+description"
 horizontal_alignment = 1
 
 [node name="Collect" type="Button" parent="ColorRect"]
 layout_mode = 0
 offset_left = 135.294
-offset_top = 171.323
+offset_top = 172.41
 offset_right = 212.294
-offset_bottom = 202.323
+offset_bottom = 203.41
 scale = Vector2(0.647059, 0.647059)
 text = "COLLECT"
 
 [node name="Image" type="Sprite2D" parent="ColorRect"]
-position = Vector2(160.294, 87.5)
-scale = Vector2(1.5, 1.5)
+position = Vector2(160.294, 86.413)
+scale = Vector2(2.17391, 2.17391)
 texture = ExtResource("1_h78fc")

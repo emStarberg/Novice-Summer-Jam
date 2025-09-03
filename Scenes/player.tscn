@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=3 uid="uid://npgtqaxmg766"]
+[gd_scene load_steps=154 format=3 uid="uid://npgtqaxmg766"]
 
 [ext_resource type="Script" uid="uid://kvin8xcxii1f" path="res://Scripts/Player.cs" id="1_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://doq8g3ib80ncb" path="res://Assets/RabbitIdle.png" id="2_tx1dd"]
@@ -17,7 +17,6 @@
 [ext_resource type="AudioStream" uid="uid://b21tqug88550q" path="res://audio/Walking_On_Grass_Slow.wav" id="14_fd4e3"]
 [ext_resource type="AudioStream" uid="uid://dy8wmkke7oyfc" path="res://audio/Hit_Enamy_2.wav" id="15_qqcod"]
 [ext_resource type="AudioStream" uid="uid://uoky0t6mytcg" path="res://audio/Slash2.wav" id="16_igrcy"]
-[ext_resource type="Script" uid="uid://deo3mmjf8iodc" path="res://fog.gd" id="17_qqcod"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e51mn"]
 size = Vector2(16, 16)
@@ -1246,6 +1245,118 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6b312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lisdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1x1j")
+}],
+"loop": false,
+"name": &"sweater_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8b32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj1g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usbl8")
+}],
+"loop": false,
+"name": &"sweater_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtg1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuaet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqbau")
+}],
+"loop": false,
+"name": &"sweater_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5f5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvbpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sscpr")
+}],
+"loop": false,
+"name": &"sweater_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lisdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1x1j")
+}],
+"loop": false,
+"name": &"sword_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8b32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj1g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usbl8")
+}],
+"loop": false,
+"name": &"sword_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtg1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuaet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqbau")
+}],
+"loop": false,
+"name": &"sword_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5f5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvbpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sscpr")
+}],
+"loop": false,
+"name": &"sword_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_f5f5t")
 }, {
 "duration": 1.0,
@@ -1258,14 +1369,6 @@ animations = [{
 "name": &"up",
 "speed": 5.0
 }]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igrcy"]
-blend_mode = 3
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_igrcy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_igrcy"]
-size = Vector2(4, 4)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_f1ek2")
@@ -1299,21 +1402,22 @@ animation = &"sword_up"
 [node name="Die" type="AnimatedSprite2D" parent="Animations"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_by7i4")
-animation = &"up"
+animation = &"sweater_left"
 
 [node name="Raycasts" type="Node2D" parent="."]
 
 [node name="CastDown" type="RayCast2D" parent="Raycasts"]
-target_position = Vector2(0, 18)
+target_position = Vector2(0, 15)
 
 [node name="CastUp" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 3)
 target_position = Vector2(0, -18)
 
 [node name="CastLeft" type="RayCast2D" parent="Raycasts"]
-target_position = Vector2(-20, 0)
+target_position = Vector2(-15, 0)
 
 [node name="CastRight" type="RayCast2D" parent="Raycasts"]
-target_position = Vector2(21, 0)
+target_position = Vector2(15, 0)
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("9_qqcod")
@@ -1328,22 +1432,6 @@ stream = ExtResource("15_qqcod")
 
 [node name="Sword" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("16_igrcy")
-
-[node name="Fog" type="Sprite2D" parent="."]
-top_level = true
-z_index = 3
-material = SubResource("CanvasItemMaterial_igrcy")
-position = Vector2(0.5, 0.5)
-texture = SubResource("PlaceholderTexture2D_igrcy")
-centered = false
-script = ExtResource("17_qqcod")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_igrcy")
 
 [connection signal="animation_finished" from="Animations/Move" to="." method="OnMoveAnimFinished"]
 [connection signal="animation_finished" from="Animations/Attack" to="." method="OnAttackAnimFinished"]

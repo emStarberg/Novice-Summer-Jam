@@ -32,7 +32,18 @@ public partial class TurnManager : Node
 		// Increase turn count
 		turnCount++;
 		GD.Print("Moved to turn: " + turnCount + " Input: " + playerAction);
-		
+
 
 	}
+
+	public void OnEndEntered(Node2D body)
+	{
+		GD.Print("End Entered");
+		if (body.IsInGroup("player"))
+		{
+			GetTree().ChangeSceneToFile("res://Scenes/end_screen.tscn");
+		}
+	}
+
+
 }

@@ -3,7 +3,7 @@ extends CharacterBody2D
 # --- Enemy parameters ---
 @export var speed: float = 64.0              # Pixels per second, same as player
 @export var move_distance: float = 16.0      # One tile per turn
-var screen_size: Vector2 = Vector2(ProjectSettings.get("display/window/size/viewport_width") as float, ProjectSettings.get("display/window/size/viewport_height") as float)
+@export var screen_size: Vector2 = Vector2(1152, 648)
 @export var max_hits: int = 3
 
 # --- Movement state ---
@@ -42,7 +42,7 @@ var current_hits: int = 0
 @onready var hurt_sprite: AnimatedSprite2D = $Animations/Hurt
 @onready var death_sprite: AnimatedSprite2D = $Animations/Death
 
-@onready var turn_manager: Node = get_parent().get_parent().get_parent().get_node("Turn Manager") # Get turn manager as Node2D
+@onready var turn_manager: Node = get_parent().get_node("Turn Manager") # Get turn manager as Node2D
 
 
 # --- Setup ---
@@ -141,7 +141,7 @@ func _attack_player(target: CharacterBody2D) -> void:
 		can_attack = false
 
 		if target.has_method("Hurt"):
-			target.call("Hurt", 10.0)
+			target.call("Hurt", 20.0)
 
 		# Play attack animation in correct direction
 		var dir_str: String = "down"

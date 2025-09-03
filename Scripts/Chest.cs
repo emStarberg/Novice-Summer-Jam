@@ -7,16 +7,13 @@ using System;
 // -----------------------------------------------------------------------------
 public partial class Chest() : StaticBody2D
 {
+	[Export] public string ItemName;
+	private Item item;
+
 	private Inventory playerInventory;
 	private CanvasLayer uiLayer;
 	private TurnManager turnManager;
 	
-	[Export]
-	private int itemNum = 0;
-	
-	private Item[] items = [new Sword(), new Carrot(), new Sweater()];
-	
-	private Item item;
 
 	private AnimatedSprite2D openAnim;
 	private Node currentOverlay;
@@ -24,15 +21,27 @@ public partial class Chest() : StaticBody2D
 
 	public override void _Ready()
 	{
+		if (ItemName == "Sword")
+		{
+			item = new Sword();
+		}
+		else if (ItemName == "Sweater")
+		{
+			item = new Sweater();
+		}
+		else
+		{
+			item = new Carrot();
+		}
+			
+		
 		audio = GetNode<AudioStreamPlayer2D>("Audio");
 		openAnim = GetNode<AnimatedSprite2D>("Open");
 		openAnim.Animation = "open";
 
-		playerInventory = GetParent().GetParent().GetParent().GetNode<Inventory>("Player/Inventory");
-		uiLayer = GetParent().GetParent().GetParent().GetNode<CanvasLayer>("CanvasLayer");
-		turnManager = GetParent().GetParent().GetParent().GetNode<TurnManager>("Turn Manager");
-		
-		item = items[itemNum];
+		playerInventory = GetParent().GetNode<Inventory>("Player/Inventory");
+		uiLayer = GetParent().GetNode<CanvasLayer>("CanvasLayer");
+		turnManager = GetParent().GetNode<TurnManager>("Turn Manager");
 	}
 
 
@@ -41,7 +50,6 @@ public partial class Chest() : StaticBody2D
 	/// </summary>
 	public void Open()
 	{
-		
 		if (item != null)
 		{
 			audio.Play();
@@ -49,7 +57,7 @@ public partial class Chest() : StaticBody2D
 			openAnim.Visible = true;
 			openAnim.Play();
 		}
-		OnCollectPressed();
+		
 	}
 
 	/// <summary>
@@ -98,13 +106,23 @@ public partial class Chest() : StaticBody2D
 		}
 	}
 	
+	/// <summary>
+	/// Sets the item inside the chest. Should be called on instantiate
+	/// </summary>
+	public void SetItem(Item setItem)
+	{
+		this.item = setItem;
+	}
+	public Item GetItem()
+	{
+		return this.item;
+	}
 
 	/// <summary>
 	/// When collect button pressed, add item to inventory and other effects
 	/// </summary>
 	public void OnCollectPressed()
 	{
-
 		// Remove overlay
 		currentOverlay.QueueFree();
 		currentOverlay = null;
